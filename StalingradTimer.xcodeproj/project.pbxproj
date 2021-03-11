@@ -13,6 +13,7 @@
 		0425309525FAB48F0061C318 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309425FAB48F0061C318 /* Preview Assets.xcassets */; };
 		042530A025FAB48F0061C318 /* StalingradTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425309F25FAB48F0061C318 /* StalingradTimerTests.swift */; };
 		042530AB25FAB48F0061C318 /* StalingradTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */; };
+		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		042530A625FAB48F0061C318 /* StalingradTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StalingradTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StalingradTimerUITests.swift; sourceTree = "<group>"; };
 		042530AC25FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,9 @@
 			children = (
 				0425308D25FAB48C0061C318 /* StalingradTimerApp.swift */,
 				0425308F25FAB48C0061C318 /* ContentView.swift */,
+				042530C025FAB5A50061C318 /* View */,
+				042530C825FAB5BF0061C318 /* Model */,
+				042530C725FAB5AE0061C318 /* ViewModel */,
 				0425309125FAB48F0061C318 /* Assets.xcassets */,
 				0425309625FAB48F0061C318 /* Info.plist */,
 				0425309325FAB48F0061C318 /* Preview Content */,
@@ -128,6 +133,28 @@
 				042530AC25FAB48F0061C318 /* Info.plist */,
 			);
 			path = StalingradTimerUITests;
+			sourceTree = "<group>";
+		};
+		042530C025FAB5A50061C318 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				042530BB25FAB59E0061C318 /* TimerScreen.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		042530C725FAB5AE0061C318 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		042530C825FAB5BF0061C318 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0425309025FAB48C0061C318 /* ContentView.swift in Sources */,
+				042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */,
 				0425308E25FAB48C0061C318 /* StalingradTimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
