@@ -99,9 +99,9 @@
 			children = (
 				0425308D25FAB48C0061C318 /* StalingradTimerApp.swift */,
 				0425308F25FAB48C0061C318 /* ContentView.swift */,
-				042530C025FAB5A50061C318 /* View */,
 				042530C825FAB5BF0061C318 /* Model */,
 				042530C725FAB5AE0061C318 /* ViewModel */,
+				042530C025FAB5A50061C318 /* View */,
 				0425309125FAB48F0061C318 /* Assets.xcassets */,
 				0425309625FAB48F0061C318 /* Info.plist */,
 				0425309325FAB48F0061C318 /* Preview Content */,
