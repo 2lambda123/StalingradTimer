@@ -9,11 +9,11 @@ import SwiftUI
 
 struct TimerScreen: View {
     var body: some View {
-        Text("asd")
+      Text("asd")
     }
 }
-    struct TimerScreen_Previews: PreviewProvider {
-        static var previews: some View {
-            TimerScreen()
-        }
+struct TimerScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        TimerScreen()
     }
+}
