@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 class TimerManager: ObservableObject {
-    var timer: Timer?
-    @Published var timeleft = 3700 // seconds
+    var timer = Timer()
+    @Published var timeleft = 675 // seconds
     @Published var trainMode: TrainMode = .initial
     
     func startTimer() {
@@ -25,12 +25,12 @@ class TimerManager: ObservableObject {
     }
     func pauseTimer() {
         trainMode = .paused
-        timer?.invalidate()
+        timer.invalidate()
     }
     func resetTimer() {
         trainMode = .initial
         timeleft = 3614
-        timer?.invalidate()
+        timer.invalidate()
     }
     func plusTime() {
         timeleft += 1
