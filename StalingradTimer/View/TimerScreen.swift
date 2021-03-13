@@ -9,7 +9,20 @@ import SwiftUI
 
 struct TimerScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Text("Hello")
+                .navigationBarTitle(Text("World"), displayMode: .inline)
+                .navigationBarItems(
+                    trailing:
+                        Button(
+                            action: { print("Going to Setting") },
+                            label: { Text("Setting") }
+                        )
+                    
+                    
+                )
+            
+        }
     }
 }
 
