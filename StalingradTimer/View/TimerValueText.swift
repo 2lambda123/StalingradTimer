@@ -43,8 +43,8 @@ struct TimerValueText: View {
                                 lineWidth: 20,
                                 lineCap: .square))
                 Circle()
-//                    .trim(from: 0, to: CGFloat(timerManager.timeleft) / 20   )
-                    .trim(from: 0, to: 18 / 20   )
+                    .trim(from: 0, to: (20 - CGFloat(timerManager.timeleft)) / 20 )
+                                            
                     .stroke(Color.red,
                             style: StrokeStyle(
                                 lineWidth: 20,
