@@ -17,7 +17,7 @@ class TimerManager: ObservableObject {
     @Published var trimTo: Float = 1
     
     func startTimer() {
-        print("end timer")
+        print("start timer")
         trainMode = .work
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             self.timeleft -= 1
