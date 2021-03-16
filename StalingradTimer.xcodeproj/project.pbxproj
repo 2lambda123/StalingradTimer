@@ -14,6 +14,7 @@
 		042530A025FAB48F0061C318 /* StalingradTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425309F25FAB48F0061C318 /* StalingradTimerTests.swift */; };
 		042530AB25FAB48F0061C318 /* StalingradTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */; };
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
+		044BCC8C25FEA9770090A8B1 /* TimerTestingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044BCC8B25FEA9760090A8B1 /* TimerTestingPage.swift */; };
 		04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEAD25FCE8D400254588 /* TimerManager.swift */; };
 		04A9EEB325FCE91C00254588 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEB225FCE91C00254588 /* TimerModel.swift */; };
 		04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEBF25FCEB6F00254588 /* Helper.swift */; };
@@ -54,6 +55,7 @@
 		042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StalingradTimerUITests.swift; sourceTree = "<group>"; };
 		042530AC25FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
+		044BCC8B25FEA9760090A8B1 /* TimerTestingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTestingPage.swift; sourceTree = "<group>"; };
 		04A9EEAD25FCE8D400254588 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		04A9EEB225FCE91C00254588 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		04A9EEBF25FCEB6F00254588 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				042530BB25FAB59E0061C318 /* TimerScreen.swift */,
 				04A9EED825FCFF0F00254588 /* TimerValueText.swift */,
+				044BCC8B25FEA9760090A8B1 /* TimerTestingPage.swift */,
 				04A9EEC525FCEBB200254588 /* ControlsAndItems */,
 				04A9EEC425FCEB9B00254588 /* Modifiers */,
 			);
@@ -329,6 +332,7 @@
 				04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */,
 				04A9EEB325FCE91C00254588 /* TimerModel.swift in Sources */,
 				04A9EED425FCEC4100254588 /* RoundButtonForTimer.swift in Sources */,
+				044BCC8C25FEA9770090A8B1 /* TimerTestingPage.swift in Sources */,
 				042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */,
 				0425308E25FAB48C0061C318 /* StalingradTimerApp.swift in Sources */,
 				04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */,

@@ -41,9 +41,10 @@ struct ContentView: View {
             }
                 .tag(2)
             
-            Image(systemName: "gear")
-                .resizable()
-                .frame(width: 300, height: 300)
+//            Image(systemName: "gear")
+//                .resizable()
+//                .frame(width: 300, height: 300)
+            Text("TEST")
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Меню")

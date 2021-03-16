@@ -33,6 +33,7 @@ struct TimerValueText: View {
                         .foregroundColor(Color.black)
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
+//                        .scaledToFit()
                     
                     Text(trainMode)
                         .font(.custom("HelveticaNeue-Thin", size: 35))
@@ -64,10 +65,8 @@ struct TimerValueText: View {
 //                    .animation(.default) // if step 0.1
             }
             .frame(height: UIScreen.main.bounds.width - 32)
-            
+//            .scaledToFit()
             .rotationEffect(.init(degrees: -90))
-            Spacer()
-            //Start and reset buttons
             
             
         }
