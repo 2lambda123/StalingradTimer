@@ -16,78 +16,96 @@ struct TimerScreen: View {
         
         ZStack {
             
-            // Timer
+            // MARK: - Time + trainig mode
             VStack {
                 ZStack {
-                    Group{
+                    Group {
                         TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft), textSize: 120, fontName: "HelveticaNeue-Light", trainMode: "Тренировка", trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
                             // if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                             .onTapGesture {
                                 timerManager.timeleft += 1
                             }
-                        
                     }
-                    
+                    //MARK: - Reset button
+                    HStack {
+                        Spacer()
+                        VStack {
+                            RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
+                            Spacer()
+                        }
+                    }
                 }
+                .padding(.bottom)
                 
-                Spacer()
                 //MARK: - Rounds and cycles
                 HStack {
                     VStack {
-                        Text("1/12")
-                            .font(.custom("HelveticaNeue-Thin", size: 35))
+                        Text("9")
+                            .font(.custom("HelveticaNeue-Thin", size: 38))
+//                            .fontWeight(.regular)
+                            
+                            +
+                            Text("/12")
+                            .font(.custom("HelveticaNeue-Thin", size: 28))
+                            .fontWeight(.ultraLight)
                         
                         Text("РАУНДЫ")
-                            .font(.custom("HelveticaNeue", size: 18))
-                            .opacity(0.5)
+                            .font(.custom("HelveticaNeue-Thin", size: 16))
+                            .fontWeight(.ultraLight)
                     }
                     Spacer()
                     VStack {
                         Text("12:57")
-                            .font(.custom("HelveticaNeue-Thin", size: 35))
+                            .font(.custom("HelveticaNeue-Thin", size: 38))
+//                            .fontWeight(.regular)
                         Text("ОСТАЛОСЬ")
-                            .font(.custom("HelveticaNeue", size: 18))
-                            .opacity(0.5)
+                            .font(.custom("HelveticaNeue-Thin", size: 16))
+                            .fontWeight(.ultraLight)
                     }
                     Spacer()
                     VStack {
-                        Text("1/12")
-                            .font(.custom("HelveticaNeue-Thin", size: 35))
+                        Text("1")
+                            .font(.custom("HelveticaNeue-Thin", size: 38))
+//                            .fontWeight(.regular)
+                            +
+                            Text("/12")
+                            .font(.custom("HelveticaNeue-Thin", size: 28))
+                            .fontWeight(.ultraLight)
                         Text("ЦИКЛЫ")
-                            .font(.custom("HelveticaNeue", size: 18))
-                            .opacity(0.5)
+                            .font(.custom("HelveticaNeue-Thin", size: 16))
+                            .fontWeight(.ultraLight)
                         
                     }
                 }
                 
-                Spacer()
+//                Spacer()
                 Spacer()
                 
                 
-                // Start button
+                //MARK: - Start button
                 HStack {
                     //                        StartPauseButton(action: { withAnimation(.easeIn) { timerManager.startTimer() } }, buttonText: "START")
                     if timerManager.trainMode == .initial {
-                        StartPauseButton(action: {timerManager.startTimer()} , buttonText: "START")
+                        StartPauseButton(action: {timerManager.startTimer()} , buttonText: "СТАРТ")
                     }
                     if timerManager.trainMode == .work {
-                        StartPauseButton(action: {timerManager.pauseTimer()}, buttonText: "PAUSE")
+                        StartPauseButton(action: {timerManager.pauseTimer()}, buttonText: "ПАУЗА")
                     }
                     if timerManager.trainMode == .paused {
                         StartPauseButton(action: {timerManager.startTimer()}, buttonText: "START")
                     }
-                }
+                }.padding(.top)
             }
             
             
-            //reset button
-            VStack {
-                HStack {
-                    Spacer()
-                    RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
-                }
-                Spacer()
-            }
+            //MARK: - Reset button (test)
+//            VStack {
+//                HStack {
+//                    Spacer()
+//                    RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
+//                }
+//                Spacer()
+//            }
         } //Main ZStack
         .padding()
         
