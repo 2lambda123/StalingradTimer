@@ -17,7 +17,7 @@ struct TimerValueText: View {
 //    @State var userTimeSet: CGFloat = 20
 //    var trimFrom: CGFloat
     var trimTo: CGFloat
-    @ObservedObject var timerManager = TimerManager()
+    @ObservedObject private var timerManager = TimerManager()
     
    
     
@@ -33,8 +33,7 @@ struct TimerValueText: View {
                         .foregroundColor(Color.black)
                         .lineLimit(1)
                         .minimumScaleFactor(0.1)
-//                        .scaledToFit()
-                    
+//                        .shadowForView()
                     Text(trainMode)
                         .font(.custom("HelveticaNeue-Thin", size: 35))
                         // GurmukhiMN, EuphemiaUCAS, HelveticaNeue-Medium, HelveticaNeue-Thin
@@ -53,21 +52,19 @@ struct TimerValueText: View {
                                 lineCap: .square))
                 Circle()
                     .trim(from: 0, to: trimTo)
-                    
                     .stroke(Color.red,
                             style: StrokeStyle(
                                 lineWidth: 20,
                                 lineCap: .butt))
-//
                     .animation(.easeIn) // if step 1
 //                    .animation(.easeIn(duration: 0.3))
-                    
 //                    .animation(.default) // if step 0.1
+                    .shadowForView()
             }
-            .frame(height: UIScreen.main.bounds.width - 32)
+//            .frame(maxWidth:  UIScreen.main.bounds.width - 32, maxHeight: UIScreen.main.bounds.width - 32)
+            
 //            .scaledToFit()
             .rotationEffect(.init(degrees: -90))
-            
             
         }
         
