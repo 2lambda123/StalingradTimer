@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var selected = 0
     
     var body: some View {
-        NavigationView {
+        
             
             TabView(selection: $selected) {
                 
@@ -54,48 +54,46 @@ struct ContentView: View {
                     .tag(3)
                 
             }
-            .tabViewStyle(DefaultTabViewStyle())
+            
             .accentColor(.black)
             
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    VStack {
-                        Text(secondsToMinutesAndSeconds(seconds: timerManager.timeleft))
-                            .font(Font.custom("ArialMT", size: 30))
-                        Spacer()
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: Text("Second View")) {
-                            ZStack {
-                                Image(systemName: "slider.horizontal.3")
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                            }
-                            //
-                        }
-                        
-                        
-                    }
-                }
-            } //toolBars
-        }
+//            .navigationBarTitleDisplayMode(.inline)
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                }
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .principal) {
+//                    VStack {
+//                        Text(secondsToMinutesAndSeconds(seconds: timerManager.timeleft))
+//                            .font(Font.custom("ArialMT", size: 30))
+//                        Spacer()
+//                    }
+//                }
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    HStack {
+//                        Spacer()
+//                        NavigationLink(destination: Text("Second View")) {
+//                            ZStack {
+//                                Image(systemName: "slider.horizontal.3")
+//                                    .foregroundColor(.black)
+//                                    .font(.title)
+//                            }
+//                            //
+//                        }
+//
+//
+//                    }
+//                }
+//            } //toolBars
+//        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-       
             ContentView()
-        }
-    
+        }    
 }
