@@ -28,7 +28,7 @@ struct ContentView: View {
                     }
                     .tag(0)
                 
-                SecondTimerScreen()
+                Text("map")
                     .tabItem {
                         Text("Бег")
                         Image(systemName: (selected == 1 ? "map.fill" : "map"))
