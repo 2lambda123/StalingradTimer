@@ -15,6 +15,7 @@ struct TimerScreen: View {
     var body: some View {
         
         ZStack {
+            
             VStack {
                 VStack {
                     HStack {
@@ -29,29 +30,16 @@ struct TimerScreen: View {
                 }
                 // MARK: - Time + trainig mode
                 ZStack {
-                    TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft), textSize: 120, fontName: "HelveticaNeue-Light", trainMode: "Тренировка", trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
+                    TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft),
+                        trainMode: "Тренировка",
+                        trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
+                        
                         // if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                         .onTapGesture {
                             timerManager.timeleft += 1
                         }
-                    VStack {
-                        Spacer()
-                        HStack {
-                            Spacer()
-                            RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
-                        }
-                    }
                 }
-                
-                
-                //MARK: - Reset button
-//                HStack {
-//                    Spacer()
-//                    RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
-//                }
-                        
-                        //                           Spacer()
-                 
+                .padding(.bottom)
                 
                 //MARK: - Rounds and cycles
                 HStack {
@@ -93,9 +81,9 @@ struct TimerScreen: View {
                         
                     }
                 }
-//                .padding(.bottom)
+                .padding(.bottom)
                 
-                                Spacer()
+                Spacer()
                 
                 
                 //MARK: - Start button
@@ -111,31 +99,25 @@ struct TimerScreen: View {
                         StartPauseButton(action: {timerManager.startTimer()}, buttonText: "СТАРТ")
                     }
                 }
-//                .padding(.top)
             }
             
-            
-            //MARK: - Reset button (test)
-            //            VStack {
-            //                HStack {
-            //                    Spacer()
-            //                    RoundButtonForTimer(action: { withAnimation(.linear(duration: 0.5)) { timerManager.resetTimer()}  }, buttonColor: .red, imageName: "gobackward")
-            //                }
-            //                Spacer()
-            //            }
+            //MARK: - Reset button
+            VStack {
+                Spacer()
+                HStack {
+                    ResetButton(action:  { timerManager.resetTimer()  }, buttonColor: .red, imageName: "gobackward")
+                    Spacer()
+                }
+            }
         } //Main ZStack
         .padding()
     }
 }
 struct TimerScreen_Previews: PreviewProvider {
     static var previews: some View {
-//        NavigationView {
-            
-            TabView {
-                TimerScreen()
-//            }.navigationBarTitleDisplayMode(.inline)
+        TabView {
+            TimerScreen()
         }
-        
         
     }
 }
