@@ -18,14 +18,12 @@ struct TimerScreen: View {
             VStack {
                 VStack {
                     HStack {
-                        Text(Image(systemName: "gearshape"))
-                            .font(.system(size: 35))
-                            .fontWeight(.light)
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 35, weight: .light))
                             .foregroundColor(.black)
                         Spacer()
-                        Text(Image(systemName: "stopwatch"))
-                            .font(.system(size: 35))
-                            .fontWeight(.light)
+                        Image(systemName: "stopwatch")
+                            .font(.system(size: 35, weight: .light))
                             .foregroundColor(.black)
                     }
                 }
