@@ -22,7 +22,7 @@ struct ResetButton: View {
                         .shadowForView()
                         .overlay(
                             Circle()
-                                .stroke(Color.red, lineWidth: 1))
+                                .stroke(buttonColor, lineWidth: 1))
                         .frame(width: 50, height: 50)
                     Image(systemName: imageName)
                         .resizable()

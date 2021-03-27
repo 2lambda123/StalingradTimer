@@ -8,8 +8,8 @@
 import Foundation
 
 enum TrainMode {
-    case work
-    case paused
     case initial
+    case work
     case rest
+    case paused
 }

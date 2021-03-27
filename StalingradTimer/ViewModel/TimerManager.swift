@@ -10,14 +10,21 @@ import Combine
 
 
 class TimerManager: ObservableObject {
-    var timer = Timer()
-    @Published var timeleft:Float = 20 // seconds
+    
+    var timer: Timer?
+    var workTime:Float
+    @Published var timeleft:Float = 0 // seconds
     @Published var trainMode: TrainMode = .initial
     @Published var userTimeSet: Float = 20
     @Published var trimTo: Float = 1
     
+    internal init(workTime: Float) {
+        self.workTime = workTime
+    }
+    
     func startTimer() {
         print("start timer")
+        timeleft = workTime
         trainMode = .work
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             self.timeleft -= 1
@@ -32,13 +39,14 @@ class TimerManager: ObservableObject {
     func pauseTimer() {
         print("pause timer")
         trainMode = .paused
-        timer.invalidate()
+        timer?.invalidate()
     }
     func resetTimer() {
         print("reset timer")
         trainMode = .initial
         timeleft = 20
-        timer.invalidate()
+        timer?.invalidate()
+        timer = nil
     }
     
     func plusTime() {

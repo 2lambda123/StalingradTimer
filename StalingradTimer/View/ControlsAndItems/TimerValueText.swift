@@ -15,7 +15,7 @@ struct TimerValueText: View {
 //    @State var userTimeSet: CGFloat = 20
 //    var trimFrom: CGFloat
     var trimTo: CGFloat
-    @ObservedObject private var timerManager = TimerManager()
+    
     
    
     
@@ -37,7 +37,7 @@ struct TimerValueText: View {
                         // GurmukhiMN, EuphemiaUCAS, HelveticaNeue-Medium, HelveticaNeue-Thin
                         .shadowForView()
                         .offset(x: 0, y: -((UIScreen.main.bounds.width) / 4))
-                        .minimumScaleFactor(0.1)
+//                        .minimumScaleFactor(0.1)
                 }
                 
                 .rotationEffect(.init(degrees: 90))

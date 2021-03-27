@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct TimerScreen: View {
+ 
+    @ObservedObject private var timerManager = TimerManager(workTime: 20)
     
-    
-    
-    @ObservedObject private var timerManager = TimerManager()
     var body: some View {
         
         ZStack {
@@ -19,13 +18,35 @@ struct TimerScreen: View {
             VStack {
                 VStack {
                     HStack {
+//                        ZStack {
+//                            Circle()
+//                                .foregroundColor(Color.white)
+//                                .frame(width: 35, height: 35)
+//                                .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 4, y: 8)
+//
+//                            Image(systemName: "gearshape")
+//                                .font(.system(size: 35, weight: .light))
+//                                .foregroundColor(.black)
+////                                .shadowForView()
+////                            Image(systemName: "gearshape.fill")
+////                                .font(.system(size: 32, weight: .light))
+////                                .foregroundColor(.white)
+//////                                .offset(x: -0.1, y: -0.1)
+////                                .shadow(color: .green, radius: 5, x: 2, y: 4)
+//
+//                        }
                         Image(systemName: "gearshape")
                             .font(.system(size: 35, weight: .light))
                             .foregroundColor(.black)
+//                            .background(Color.green)
+//                            .shadow(color: Color.red, radius: 2, x: 4, y: 8)
+
+                        
                         Spacer()
                         Image(systemName: "stopwatch")
                             .font(.system(size: 35, weight: .light))
                             .foregroundColor(.black)
+                            .shadowForView()
                     }
                 }
                 // MARK: - Time + trainig mode
@@ -107,6 +128,7 @@ struct TimerScreen: View {
                 HStack {
                     ResetButton(action:  { timerManager.resetTimer()  }, buttonColor: .red, imageName: "gobackward")
                     Spacer()
+                    
                 }
             }
         } //Main ZStack

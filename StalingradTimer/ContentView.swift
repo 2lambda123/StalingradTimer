@@ -13,7 +13,6 @@ struct ContentView: View {
       UITabBar.appearance().backgroundColor = UIColor.white
       UITabBar.appearance().backgroundImage = UIImage()
     }
-    @ObservedObject private var timerManager = TimerManager()
     @State private var selected = 0
     
     var body: some View {
