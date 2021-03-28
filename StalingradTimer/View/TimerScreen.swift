@@ -15,6 +15,7 @@ struct TimerScreen: View {
         
         ZStack {
             VStack {
+                //MARK: - "NavigationBar"
                 VStack {
                     HStack {
                         Image(systemName: "gearshape")
@@ -39,57 +40,71 @@ struct TimerScreen: View {
                                 timerManager.timeleft += 1
                             }
                     }
+                    if timerManager.trainMode == .initial {
+                        Image("StalingradLogo")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
+                            .offset(y: 40)
+                            .padding()
+                    }
                     
                     
                     // if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                 }
                 .padding(.bottom)
+                .animation(.linear)
+                
+                //                Spacer()
                 
                 //MARK: - Rounds and cycles
-                HStack {
-                    VStack {
-                        Text("9")
-                            .font(.custom("HelveticaNeue-Thin", size: 38))
-                            //                            .fontWeight(.regular)
-                            +
-                            Text("/12")
-                            .font(.custom("HelveticaNeue-Thin", size: 28))
-                            .fontWeight(.ultraLight)
+                if timerManager.trainMode != .initial {
+                    HStack {
+                        VStack {
+                            Text("9")
+                                .font(.custom("HelveticaNeue-Thin", size: 38))
+                                //                            .fontWeight(.regular)
+                                +
+                                Text("/12")
+                                .font(.custom("HelveticaNeue-Thin", size: 28))
+                                .fontWeight(.ultraLight)
+                            
+                            Text("РАУНДЫ")
+                                .font(.custom("HelveticaNeue-Thin", size: 16))
+                                .fontWeight(.ultraLight)
+                        }
                         
-                        Text("РАУНДЫ")
-                            .font(.custom("HelveticaNeue-Thin", size: 16))
-                            .fontWeight(.ultraLight)
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Text("12:57")
-                            .font(.custom("HelveticaNeue-Thin", size: 38))
-                        //                            .fontWeight(.regular)
-                        Text("ОСТАЛОСЬ")
-                            .font(.custom("HelveticaNeue-Thin", size: 16))
-                            .fontWeight(.ultraLight)
-                    }
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Text("1")
-                            .font(.custom("HelveticaNeue-Thin", size: 38))
+                        Spacer()
+                        
+                        VStack {
+                            Text("12:57")
+                                .font(.custom("HelveticaNeue-Thin", size: 38))
                             //                            .fontWeight(.regular)
-                            +
-                            Text("/12")
-                            .font(.custom("HelveticaNeue-Thin", size: 28))
-                            .fontWeight(.ultraLight)
-                        Text("ЦИКЛЫ")
-                            .font(.custom("HelveticaNeue-Thin", size: 16))
-                            .fontWeight(.ultraLight)
+                            Text("ОСТАЛОСЬ")
+                                .font(.custom("HelveticaNeue-Thin", size: 16))
+                                .fontWeight(.ultraLight)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Text("1")
+                                .font(.custom("HelveticaNeue-Thin", size: 38))
+                                //                            .fontWeight(.regular)
+                                +
+                                Text("/12")
+                                .font(.custom("HelveticaNeue-Thin", size: 28))
+                                .fontWeight(.ultraLight)
+                            Text("ЦИКЛЫ")
+                                .font(.custom("HelveticaNeue-Thin", size: 16))
+                                .fontWeight(.ultraLight)
+                        }
                     }
+                    .foregroundColor(.black)
+                    .padding(.bottom)
+                    .animation(.default)
                 }
                 //TODO: - add color with 2 schemes (for light and dark mode)
-                .foregroundColor(.black)
-                .padding(.bottom)
                 
                 Spacer()
                 
@@ -106,6 +121,7 @@ struct TimerScreen: View {
                         StartPauseButton(action: {timerManager.startTimer()}, buttonText: "СТАРТ")
                     }
                 }
+                //                .padding(.bottom)
             }
             
             //MARK: - Reset button

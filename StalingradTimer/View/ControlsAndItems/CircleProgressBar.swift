@@ -28,6 +28,14 @@ struct CircleProgressBar: View {
                 //                    .animation(.easeIn(duration: 0.3))
                 //                    .animation(.default) // if step 0.1
                 .shadowForView()
+            
+//            Image("322")
+//                .resizable()
+//                .scaledToFill()
+//                .rotationEffect(.init(degrees: 90))
+////                .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
+//                .offset(x: -40)
+//                .padding()
         }
         .rotationEffect(.init(degrees: -90))
         .frame(maxWidth:  UIScreen.main.bounds.width - 32, maxHeight: UIScreen.main.bounds.width - 32)

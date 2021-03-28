@@ -6,9 +6,9 @@
 //
 
 enum TrainModeDescribtion: String {
-    case initial = ""
-    case prepare = "Подготовка"
-    case work = "Тренировка"
-    case rest = "Отдых"
-    case paused = "Пауза"
+    case initialText = ""
+    case prepareText = "Подготовка"
+    case workText = "Тренировка"
+    case restText = "Отдых"
+    case pausedText = "Пауза"
 }
