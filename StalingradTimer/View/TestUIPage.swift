@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TestUIPage: View {
-    @ObservedObject private var timerManager = TimerManager(userWorkTimeSet: 20)
+    @ObservedObject private var timerManager = TimerManager(workTime: 20)
     var userSetWorkTime: Float = 20
     var body: some View {
         
@@ -50,13 +50,13 @@ struct TestUIPage: View {
                 }
                 // MARK: - Time + trainig mode
                 ZStack {
-                    CircleProgressBar(trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
+                    CircleProgressBar(trimTo: (20 - CGFloat(timerManager.currentTime)) / 20)
                     if timerManager.trainMode != .initial {
                         
-                        TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft),
+                        TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
                                        trainName: "Тренировка")
                             .onTapGesture {
-                                timerManager.timeleft += 1
+                                timerManager.currentTime += 1
                             }
                     }
                     

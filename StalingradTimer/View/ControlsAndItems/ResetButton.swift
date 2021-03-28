@@ -12,30 +12,24 @@ struct ResetButton: View {
     var buttonColor: Color
     var imageName: String
     var body: some View {
-       
-            
-            Button(action: action) {
-                ZStack {
-                    
-                    Circle()
-                        .foregroundColor(.white)
-                        .shadowForView()
-                        .overlay(
-                            Circle()
-                                .stroke(buttonColor, lineWidth: 1))
-                        .frame(width: 50, height: 50)
-                    Image(systemName: imageName)
-                        .resizable()
-                        .frame(width: 23, height: 23)
-                        .foregroundColor(buttonColor)
-                        .padding()
-                }
-            }
-            
+        
+        Button(action: action) {
+            ZStack {
                 
-            
-            
-            
+                Circle()
+                    .foregroundColor(.white)
+                    .shadowForView()
+                    .overlay(
+                        Circle()
+                            .stroke(buttonColor, lineWidth: 1))
+                    .frame(width: 50, height: 50)
+                Image(systemName: imageName)
+                    .resizable()
+                    .frame(width: 23, height: 23)
+                    .foregroundColor(buttonColor)
+                    .padding()
+            }
+        }
     }
 }
 
