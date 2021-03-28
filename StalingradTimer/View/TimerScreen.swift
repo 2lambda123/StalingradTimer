@@ -51,14 +51,18 @@ struct TimerScreen: View {
                 }
                 // MARK: - Time + trainig mode
                 ZStack {
-                    TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft),
-                        trainMode: "Тренировка",
-                        trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
+                    CircleProgressBar(trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
+                    if timerManager.trainMode != .initial {
+                        
+                        TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft),
+                                       trainName: "Тренировка")
+                            .onTapGesture {
+                                timerManager.timeleft += 1
+                            }
+                    }
+                    
                         
                         // if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
-                        .onTapGesture {
-                            timerManager.timeleft += 1
-                        }
                 }
                 .padding(.bottom)
                 
@@ -102,6 +106,8 @@ struct TimerScreen: View {
                         
                     }
                 }
+                //TODO: - add color with 2 schemes (for light and dark mode)
+                .foregroundColor(.black)
                 .padding(.bottom)
                 
                 Spacer()
@@ -109,7 +115,7 @@ struct TimerScreen: View {
                 
                 //MARK: - Start button
                 HStack {
-                    //                        StartPauseButton(action: { withAnimation(.easeIn) { timerManager.startTimer() } }, buttonText: "START")
+                    
                     if timerManager.trainMode == .initial {
                         StartPauseButton(action: {timerManager.startTimer()} , buttonText: "СТАРТ")
                     }

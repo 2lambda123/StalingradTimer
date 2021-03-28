@@ -23,34 +23,37 @@ class TimerManager: ObservableObject {
     }
     
     func startTimer() {
-        print("start timer")
+        print(#function)
         timeleft = workTime
         trainMode = .work
+        print("trainMome: \(trainMode)")
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             self.timeleft -= 1
             if self.timeleft < 0 {
-                self.trainMode = .initial
-                timer.invalidate()
+//                self.trainMode = .initial
                 self.resetTimer()
             }
-            
         })
     }
+    
     func pauseTimer() {
-        print("pause timer")
+        print(#function)
         trainMode = .paused
+        print("trainMome: \(trainMode)")
         timer?.invalidate()
     }
+   
     func resetTimer() {
-        print("reset timer")
+        print(#function)
         trainMode = .initial
-        timeleft = 20
+        print("trainMome: \(trainMode)")
+        timeleft = 0
         timer?.invalidate()
         timer = nil
     }
     
     func plusTime() {
-        print("plus timer")
+        print(#function)
         timeleft += 1
     }
     
