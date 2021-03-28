@@ -10,44 +10,82 @@ import Combine
 
 
 class TimerManager: ObservableObject {
-    var timer = Timer()
-    @Published var timeleft:Float = 20 // seconds
+    
+    var timer: Timer?
+   // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
+    var prepareTime: Float = 0
+    var workTime: Float
+    var restTime: Float = 0
+    var rounds = 1
+    var cycles = 1
+    
+    @Published var currentTime: Float = 0 // seconds
+    
     @Published var trainMode: TrainMode = .initial
-    @Published var userTimeSet: Float = 20
-    @Published var trimTo: Float = 1
+    @Published var trainModeDescribtion: TrainModeDescribtion = .initialText
+    
+    internal init(workTime: Float) {
+        self.workTime = workTime
+    }
     
     func startTimer() {
-        print("start timer")
+        print(#function)
+        if trainMode == .initial {
+            currentTime = workTime
+        }
         trainMode = .work
+        print("trainMome: \(trainMode)")
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-            self.timeleft -= 1
-            if self.timeleft < 0 {
-                self.trainMode = .initial
-                timer.invalidate()
+            self.currentTime -= 1
+            if self.currentTime < 0 {
+                //                self.trainMode = .initial
                 self.resetTimer()
             }
-            
         })
     }
+    
     func pauseTimer() {
-        print("pause timer")
+        print(#function)
         trainMode = .paused
-        timer.invalidate()
+        print("trainMome: \(trainMode)")
+        timer?.invalidate()
     }
+    
     func resetTimer() {
-        print("reset timer")
+        print(#function)
         trainMode = .initial
-        timeleft = 20
-        timer.invalidate()
+        print("trainMome: \(trainMode)")
+        currentTime = 0
+        timer?.invalidate()
+        timer = nil
     }
     
     func plusTime() {
-        print("plus timer")
-        timeleft += 1
+        print(#function)
+        currentTime += 1
     }
     
-    func trimToStart() {
-        trimTo = (userTimeSet - timeleft) / userTimeSet
-        
+    func round() {
+        if rounds != 0 {
+            if prepareTime != 0 {
+                trainModeDescribtion = .prepareText
+                currentTime = prepareTime
+            }
+            if prepareTime == 0 {
+                trainModeDescribtion = .workText
+                currentTime = workTime
+            }
+            if workTime == 0 {
+                trainModeDescribtion = .restText
+                currentTime = restTime
+                if currentTime == 0 {
+                    rounds -= 1
+                }
+            }
+        } else {
+            resetTimer()
+        }
     }
+    
 }
+

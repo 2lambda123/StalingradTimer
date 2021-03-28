@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "iPad Pro iOS 9-14 83.5 pt (2x).jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

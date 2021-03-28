@@ -13,7 +13,6 @@ struct ContentView: View {
       UITabBar.appearance().backgroundColor = UIColor.white
       UITabBar.appearance().backgroundImage = UIImage()
     }
-    @ObservedObject private var timerManager = TimerManager()
     @State private var selected = 0
     
     var body: some View {
@@ -54,41 +53,8 @@ struct ContentView: View {
                     .tag(3)
                 
             }
-            
             .accentColor(.black)
-            
-//            .navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                }
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .principal) {
-//                    VStack {
-//                        Text(secondsToMinutesAndSeconds(seconds: timerManager.timeleft))
-//                            .font(Font.custom("ArialMT", size: 30))
-//                        Spacer()
-//                    }
-//                }
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    HStack {
-//                        Spacer()
-//                        NavigationLink(destination: Text("Second View")) {
-//                            ZStack {
-//                                Image(systemName: "slider.horizontal.3")
-//                                    .foregroundColor(.black)
-//                                    .font(.title)
-//                            }
-//                            //
-//                        }
-//
-//
-//                    }
-//                }
-//            } //toolBars
-//        }
+
     }
 }
 

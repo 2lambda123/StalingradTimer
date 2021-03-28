@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StartPauseButton: View {
+    
     var action: () -> Void
     var buttonText: String
     var textColor =  #colorLiteral(red: 0.9254901961, green: 0.03137254902, blue: 0.1019607843, alpha: 1)
@@ -19,6 +20,7 @@ struct StartPauseButton: View {
                 .foregroundColor(Color(textColor))
                 .padding()
         }
+      
         .frame(width: 156, height: 80)
         .background(Color.white)
         //            .cornerRadius(.infinity)
