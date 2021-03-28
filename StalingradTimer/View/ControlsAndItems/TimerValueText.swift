@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimerValueText: View {
     
-    @ObservedObject private var timerManager = TimerManager(workTime: 20)
+//    @ObservedObject private var timerManager = TimerManager(userWorkTimeSet: 20)
     
     var timerText: String
     var trainName: String

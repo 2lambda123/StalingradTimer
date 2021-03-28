@@ -12,19 +12,20 @@ import Combine
 class TimerManager: ObservableObject {
     
     var timer: Timer?
-    var workTime:Float
-    @Published var timeleft:Float = 0 // seconds
+    var userWorkTimeSet: Float
+    @Published var timeleft: Float = 0 // seconds
     @Published var trainMode: TrainMode = .initial
-    @Published var userTimeSet: Float = 20
     @Published var trimTo: Float = 1
     
-    internal init(workTime: Float) {
-        self.workTime = workTime
+    internal init(userWorkTimeSet: Float) {
+        self.userWorkTimeSet = userWorkTimeSet
     }
     
     func startTimer() {
         print(#function)
-        timeleft = workTime
+        if trainMode == .initial {
+            timeleft = userWorkTimeSet
+        }
         trainMode = .work
         print("trainMome: \(trainMode)")
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
@@ -57,8 +58,5 @@ class TimerManager: ObservableObject {
         timeleft += 1
     }
     
-    func trimToStart() {
-        trimTo = (userTimeSet - timeleft) / userTimeSet
-        
-    }
+   
 }
