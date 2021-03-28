@@ -14,7 +14,6 @@ struct TimerScreen: View {
     var body: some View {
         
         ZStack {
-            
             VStack {
                 VStack {
                     HStack {
@@ -34,7 +33,6 @@ struct TimerScreen: View {
                 ZStack {
                     CircleProgressBar(trimTo: (20 - CGFloat(timerManager.timeleft)) / 20)
                     if timerManager.trainMode != .initial {
-                        
                         TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.timeleft),
                                        trainName: "Тренировка")
                             .onTapGesture {
@@ -53,7 +51,6 @@ struct TimerScreen: View {
                         Text("9")
                             .font(.custom("HelveticaNeue-Thin", size: 38))
                             //                            .fontWeight(.regular)
-                            
                             +
                             Text("/12")
                             .font(.custom("HelveticaNeue-Thin", size: 28))
@@ -63,7 +60,9 @@ struct TimerScreen: View {
                             .font(.custom("HelveticaNeue-Thin", size: 16))
                             .fontWeight(.ultraLight)
                     }
+                    
                     Spacer()
+                    
                     VStack {
                         Text("12:57")
                             .font(.custom("HelveticaNeue-Thin", size: 38))
@@ -72,7 +71,9 @@ struct TimerScreen: View {
                             .font(.custom("HelveticaNeue-Thin", size: 16))
                             .fontWeight(.ultraLight)
                     }
+                    
                     Spacer()
+                    
                     VStack {
                         Text("1")
                             .font(.custom("HelveticaNeue-Thin", size: 38))
@@ -84,7 +85,6 @@ struct TimerScreen: View {
                         Text("ЦИКЛЫ")
                             .font(.custom("HelveticaNeue-Thin", size: 16))
                             .fontWeight(.ultraLight)
-                        
                     }
                 }
                 //TODO: - add color with 2 schemes (for light and dark mode)
@@ -92,7 +92,6 @@ struct TimerScreen: View {
                 .padding(.bottom)
                 
                 Spacer()
-                
                 
                 //MARK: - Start button
                 HStack {
@@ -111,7 +110,9 @@ struct TimerScreen: View {
             
             //MARK: - Reset button
             VStack {
+                
                 Spacer()
+                
                 HStack {
                     ResetButton(action:  { timerManager.resetTimer()  }, buttonColor: .red, imageName: "gobackward")
                     Spacer()
