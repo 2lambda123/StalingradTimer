@@ -15,6 +15,7 @@
 		042530A025FAB48F0061C318 /* StalingradTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425309F25FAB48F0061C318 /* StalingradTimerTests.swift */; };
 		042530AB25FAB48F0061C318 /* StalingradTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */; };
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
+		047BF3592610989500BF5EB4 /* TrainModeDescribtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF3582610989500BF5EB4 /* TrainModeDescribtion.swift */; };
 		04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEAD25FCE8D400254588 /* TimerManager.swift */; };
 		04A9EEB325FCE91C00254588 /* TrainMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEB225FCE91C00254588 /* TrainMode.swift */; };
 		04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEBF25FCEB6F00254588 /* Helper.swift */; };
@@ -57,6 +58,7 @@
 		042530AA25FAB48F0061C318 /* StalingradTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StalingradTimerUITests.swift; sourceTree = "<group>"; };
 		042530AC25FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
+		047BF3582610989500BF5EB4 /* TrainModeDescribtion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainModeDescribtion.swift; sourceTree = "<group>"; };
 		04A9EEAD25FCE8D400254588 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		04A9EEB225FCE91C00254588 /* TrainMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainMode.swift; sourceTree = "<group>"; };
 		04A9EEBF25FCEB6F00254588 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				04A9EEB225FCE91C00254588 /* TrainMode.swift */,
+				047BF3582610989500BF5EB4 /* TrainModeDescribtion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */,
 				0425308E25FAB48C0061C318 /* StalingradTimerApp.swift in Sources */,
 				0417ECB32603EF39009D5F10 /* TestUIPage.swift in Sources */,
+				047BF3592610989500BF5EB4 /* TrainModeDescribtion.swift in Sources */,
 				04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */,
 				04A9EEC725FCEBD400254588 /* ShadowForViews.swift in Sources */,
 			);
