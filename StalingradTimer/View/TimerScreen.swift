@@ -10,7 +10,8 @@ import SwiftUI
 struct TimerScreen: View {
     
     @ObservedObject private var timerManager = TimerManager(workTime: 20)
-    
+    @State private var animateLogo = false
+    @State private var logoScaleEffect: CGFloat = 1
     var body: some View {
         
         ZStack {
@@ -36,6 +37,7 @@ struct TimerScreen: View {
                     if timerManager.trainMode != .initial {
                         TimerValueText(timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
                                        trainName: "Тренеровка")
+                            //TODO: - if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                             .onTapGesture {
                                 timerManager.currentTime += 1
                             }
@@ -47,13 +49,18 @@ struct TimerScreen: View {
                             .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
                             .offset(y: 40)
                             .padding()
+                            
+                            .scaleEffect(animateLogo ? 1 : 0)
+                            .animation(.default, value: animateLogo)
+                            .onAppear() {
+                                animateLogo = true
+                            }
                     }
                     
                     
-                    // if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                 }
                 .padding(.bottom)
-                .animation(.linear)
+                .animation(.easeOut)
                 
                 //                Spacer()
                 
@@ -100,9 +107,10 @@ struct TimerScreen: View {
                                 .fontWeight(.ultraLight)
                         }
                     }
-                    .foregroundColor(.black)
-                    .padding(.bottom)
                     .animation(.default)
+                    .foregroundColor(.black)
+                    .background(Color.white)
+                    .padding(.bottom)
                 }
                 //TODO: - add color with 2 schemes (for light and dark mode)
                 
@@ -112,7 +120,7 @@ struct TimerScreen: View {
                 HStack {
                     
                     if timerManager.trainMode == .initial {
-                        StartPauseButton(action: {timerManager.startTimer()} , buttonText: "СТАРТ")
+                        StartPauseButton(action: {timerManager.startTimer(); animateLogo = false } , buttonText: "СТАРТ")
                     }
                     if timerManager.trainMode == .work {
                         StartPauseButton(action: {timerManager.pauseTimer()}, buttonText: "ПАУЗА")
@@ -121,6 +129,7 @@ struct TimerScreen: View {
                         StartPauseButton(action: {timerManager.startTimer()}, buttonText: "СТАРТ")
                     }
                 }
+//                .animation(.linear)
                 //                .padding(.bottom)
             }
             

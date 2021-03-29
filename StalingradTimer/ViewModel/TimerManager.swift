@@ -13,16 +13,18 @@ class TimerManager: ObservableObject {
     
     var timer: Timer?
    // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    var prepareTime: Float = 0
-    var workTime: Float
-    var restTime: Float = 0
-    var rounds = 1
-    var cycles = 1
+    @Published var prepareTime: Float = 0
+    @Published var workTime: Float
+    @Published var restTime: Float = 0
+    @Published var rounds = 1
+    @Published var cycles = 1
     
     @Published var currentTime: Float = 0 // seconds
     
     @Published var trainMode: TrainMode = .initial
     @Published var trainModeDescribtion: TrainModeDescribtion = .initialText
+    
+//    @Published var animateLogo = false
     
     internal init(workTime: Float) {
         self.workTime = workTime
@@ -47,21 +49,29 @@ class TimerManager: ObservableObject {
     func pauseTimer() {
         print(#function)
         trainMode = .paused
+        trainModeDescribtion = .pausedText
         print("trainMome: \(trainMode)")
         timer?.invalidate()
     }
     
     func resetTimer() {
         print(#function)
+        
         trainMode = .initial
+        trainModeDescribtion = .initialText
         print("trainMome: \(trainMode)")
+        
         currentTime = 0
+        
         timer?.invalidate()
         timer = nil
+        
+//        animateLogo.toggle()
     }
     
     func plusTime() {
         print(#function)
+        
         currentTime += 1
     }
     
@@ -78,9 +88,7 @@ class TimerManager: ObservableObject {
             if workTime == 0 {
                 trainModeDescribtion = .restText
                 currentTime = restTime
-                if currentTime == 0 {
-                    rounds -= 1
-                }
+                
             }
         } else {
             resetTimer()
