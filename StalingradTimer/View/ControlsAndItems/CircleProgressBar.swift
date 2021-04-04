@@ -24,7 +24,7 @@ struct CircleProgressBar: View {
                         style: StrokeStyle(
                             lineWidth: 20,
                             lineCap: .butt))
-                .animation(.easeIn) // if step 1
+                .animation(.easeOut) // if step 1
                 //                    .animation(.easeIn(duration: 0.3))
                 //                    .animation(.default) // if step 0.1
                 .shadowForView()

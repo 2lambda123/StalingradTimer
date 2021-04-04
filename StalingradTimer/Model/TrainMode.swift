@@ -11,5 +11,5 @@ enum TrainMode {
     case prepare
     case work
     case rest
-    case paused
+    case cycleRest
 }
