@@ -16,7 +16,7 @@ class TimerManager: ObservableObject {
     @Published var usersPrepareTime: Float = 10
     @Published var usersWorkTime: Float = 20
     @Published var usersRestTime: Float = 5
-    @Published var usersRounds = 2
+    @Published var usersRounds = 3
     @Published var usersCycles = 1
     
     @Published var currentTime: Float = 0 // seconds
@@ -41,7 +41,6 @@ class TimerManager: ObservableObject {
         case .work : describtion = "Тренировка"
         case .rest : describtion = "Отдых"
         case .cycleRest : describtion = "Восстановление"
-            
         }
         return describtion
     }
@@ -146,15 +145,30 @@ class TimerManager: ObservableObject {
   
     
     
-    func trimController() {
-        if trainMode == .work {
+    func addTime() {
+        if trainMode == .work && currentTime < workTime {
           currentTime += 1
             totalTime += 1
         }
-     
+    }
+    
+    func circleProgressBarController() -> Float {
+        var progressValue: Float = 0
+//        CircleProgressBar(trimTo: (10 - CGFloat(timerManager.currentTime)) / 10)
+        switch trainMode {
+        case .initial : progressValue = 1
+        case .prepare : progressValue = (usersPrepareTime - currentTime) / usersPrepareTime
+        case .work : progressValue = (usersWorkTime - currentTime) / usersWorkTime
+        case .rest : progressValue = (usersRestTime - currentTime) / usersRestTime
+        case .cycleRest : progressValue = 0
+        }
+
+        
+        return progressValue
     }
     
     private func setTimerValues() {
+        print("rounds left: \(rounds)")
         prepareTime = usersPrepareTime
         workTime = usersWorkTime
         restTime = usersRestTime

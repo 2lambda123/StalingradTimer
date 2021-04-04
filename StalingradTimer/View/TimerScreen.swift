@@ -37,7 +37,13 @@ struct TimerScreen: View {
                 // MARK: - Time + trainig mode
                 ZStack {
                     // Time + trainMode
-                    CircleProgressBar(trimTo: (20 - CGFloat(timerManager.currentTime)) / 20)
+//                    CircleProgressBar(trimTo: (10 - CGFloat(timerManager.currentTime)) / 10)
+//                    withAnimation(.easeOut) {
+                    CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
+//                    }
+//                        .animation(.easeOut)
+                    
+                    
                     if timerManager.trainMode != .initial {
                         TimerValueText(
                             timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
@@ -47,7 +53,7 @@ struct TimerScreen: View {
                             .animation(.none)
                             //TODO: - if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                         .onTapGesture {
-                                timerManager.trimController()
+                                timerManager.addTime()
                             }
                     }
                     // MARK: - Stalingrad Logo

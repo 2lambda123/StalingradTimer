@@ -47,7 +47,7 @@ struct TestUIPage: View {
                             .animation(.none)
                             //TODO: - if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                         .onTapGesture {
-                                timerManager.trimController()
+                                timerManager.addTime()
                             }
                     }
                     // MARK: - Stalingrad Logo
