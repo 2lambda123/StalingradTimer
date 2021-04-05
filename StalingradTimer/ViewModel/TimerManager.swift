@@ -33,21 +33,8 @@ class TimerManager: ObservableObject {
     var rounds = 0
     var cycles = 0
     
-    func getTrainModeName() -> String {
-        var describtion: String = ""
-        switch trainMode {
-        case .initial : describtion = ""
-        case .prepare : describtion = "Подготовка"
-        case .work : describtion = "Тренировка"
-        case .rest : describtion = "Отдых"
-        case .cycleRest : describtion = "Восстановление"
-        }
-        return describtion
-    }
-//    case initialText = ""
-//    case prepareText = "Подготовка"
-//    case workText = "Тренировка"
-//    case restText = "Отдых"
+  
+
     
     func startTimer() {
         print(#function)
@@ -55,6 +42,7 @@ class TimerManager: ObservableObject {
         if trainMode == .initial {
             setTimerValues()
             totalTime = (((usersWorkTime + usersRestTime) * Float(usersRounds)) * Float(usersCycles)) - restTime
+//            totalTime = 86400 - maximum (24 chasa)
             rounds = usersRounds
             cycles = usersCycles
 
@@ -123,10 +111,20 @@ class TimerManager: ObservableObject {
         print("currentTime: \(currentTime) trainMode: \(trainMode)")
     }
   
+    func getTrainModeName() -> String {
+        var describtion: String = ""
+        switch trainMode {
+        case .initial : describtion = ""
+        case .prepare : describtion = "Подготовка"
+        case .work : describtion = "Тренировка"
+        case .rest : describtion = "Отдых"
+        case .cycleRest : describtion = "Восстановление"
+        }
+        return describtion
+    }
+    
     func pauseTimer() {
         print(#function)
-//        trainMode = .paused
-        print("trainMome: \(trainMode)")
         timer?.invalidate()
     }
     
@@ -134,7 +132,7 @@ class TimerManager: ObservableObject {
         print(#function)
         
         trainMode = .initial
-        currentTime = 0
+//        currentTime = 0
         
         timer?.invalidate()
         timer = nil
