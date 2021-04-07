@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 struct TestUIPage: View {
 
     @ObservedObject private var timerManager = TimerManager()
@@ -181,4 +181,4 @@ struct RoundsTotaltimeCycles: View {
         }
     }
 }
-
+ */

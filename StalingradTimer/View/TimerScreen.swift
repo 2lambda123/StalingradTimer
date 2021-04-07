@@ -12,7 +12,7 @@ struct TimerScreen: View {
     @ObservedObject private var timerManager = TimerManager()
     
     private let bigLogo = "StalingradLogo"
-    @State private var bigLogoScaleEffect:CGFloat = 1
+    //    @State private var bigLogoScaleEffect:CGFloat = 0.5
     @State private var bigLogoAnimate = true
     
     var body: some View {
@@ -36,7 +36,7 @@ struct TimerScreen: View {
                 }
                 // MARK: - Time + trainig mode
                 ZStack {
-                    // Time + trainMode
+                    
                     CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
                         .animation(.easeOut(duration: 0.5))
                     
@@ -46,109 +46,39 @@ struct TimerScreen: View {
                             trainName: timerManager.getTrainModeName()
                         )
                         .animation(.none)
-                        //TODO: - if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
                         .onTapGesture {
                             timerManager.addTime()
                         }
                     }
                     // MARK: - Stalingrad Logo
                     if timerManager.trainMode == .initial {
-                        Image(bigLogo)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
-                            .offset(y: 40)
-                            .scaleEffect(bigLogoAnimate ? 1 : 0.9)
-                            
-                            .padding()
-                            .onAppear() {
-                                bigLogoAnimate = true
-                            }
+                        StalingradLogo(bigLogoAnimate: $bigLogoAnimate)
                     }
                 }
-                .animation(.default)
-                .padding(.bottom)
+//                .padding(.bottom)
                 
-                //                Spacer()
-                
+                Spacer().frame(height: 16)
                 //MARK: - Rounds and cycles
-                if timerManager.trainMode != .initial {
-                    VStack {
-                        HStack {
-                            // Rounds
-                            VStack {
-                                Text("\(timerManager.rounds)")
-                                    .font(.custom("HelveticaNeue-Thin", size: 38))
-                                    //                            .fontWeight(.regular)
-                                    +
-                                    Text("/\(timerManager.usersRounds)")
-                                    .font(.custom("HelveticaNeue-Thin", size: 28))
-                                    .fontWeight(.ultraLight)
-                            }
-                            .frame(maxWidth: .infinity)
-                            
-                            // Total time
-                            VStack {
-                                Text("\(secondsToMinutesAndSeconds(seconds: timerManager.totalTime) )")
-                                    .font(.custom("HelveticaNeue-Thin", size: 38))
-                                    .scaledToFit()
-                                    .minimumScaleFactor(0.1)
-                            }
-                            .frame(maxWidth: .infinity)
-                            
-                            // Cycles
-                            VStack {
-                                Text(timerManager.usersCycles == 0 ? "" : "\(timerManager.cycles)")
-                                    .font(.custom("HelveticaNeue-Thin", size: 38))
-                                    //                            .fontWeight(.regular)
-                                    +
-                                    Text(timerManager.usersCycles == 0 ? "" : "/\(timerManager.usersCycles)")
-                                    
-                                    .font(.custom("HelveticaNeue-Thin", size: 28))
-                                    .fontWeight(.ultraLight)
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        
-                        .foregroundColor(.black)
-                        .background(Color.white)
-                        
-                        HStack {
-                            Text("РАУНДЫ")
-                                .font(.custom("HelveticaNeue-Thin", size: 16))
-                                .fontWeight(.ultraLight)
-                                .frame(maxWidth: .infinity)
-                            Text("ОСТАЛОСЬ")
-                                .font(.custom("HelveticaNeue-Thin", size: 16))
-                                .fontWeight(.ultraLight)
-                                .frame(maxWidth: .infinity)
-                            Text(timerManager.usersCycles == 0 ? "" : "ЦИКЛЫ")
-                                .font(.custom("HelveticaNeue-Thin", size: 16))
-                                .fontWeight(.ultraLight)
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                    
-                    
-                }
+                RoundsTotaltimeCycles(timerManager: timerManager )
+                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
+                    .animation(.easeIn(duration: 0.15))
+//                    .padding(.top)
+                
                 //TODO: - add color with 2 schemes (for light and dark mode)
                 
                 Spacer()
                 
                 //MARK: - Start button
-                HStack {
-                    timerManager.startButtonOn ?
-                        StartPauseButton(action: {
-                                            timerManager.startTimer();
-                                            timerManager.startButtonOn = false;
-                                            bigLogoAnimate = false},
-                                         buttonText: "СТАРТ") :
-                        StartPauseButton(action: {
-                                            timerManager.pauseTimer();
-                                            timerManager.startButtonOn = true },
-                                         buttonText: "ПАУЗА")
-                }
-                .padding(.top)
+                // TODO: - сделать кнопку ccaletofit, что добавить padding  к totaltime
+                    timerManager.startButtonOn ? StartPauseButton(action: {
+                                                                    timerManager.startTimer();
+                                                                    timerManager.startButtonOn = false;
+                                                                    bigLogoAnimate = false },
+                                                                  buttonText: "СТАРТ") :
+                                                StartPauseButton(action: {
+                                                                    timerManager.pauseTimer();
+                                                                    timerManager.startButtonOn = true },
+                                                                 buttonText: "ПАУЗА")
             }
             
             //MARK: - Reset button
@@ -156,9 +86,12 @@ struct TimerScreen: View {
                 Spacer()
                 
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); withAnimation(.easeInOut) { bigLogoAnimate = true } }, buttonColor: .red, imageName: "gobackward")
+                    ResetButton(action:  {
+                                    timerManager.resetTimer();
+                                    withAnimation(.easeInOut) { bigLogoAnimate = true } },
+                                buttonColor: .red,
+                                imageName: "gobackward")
                     Spacer()
-                    
                 }
             }
         } //Main ZStack
@@ -175,3 +108,87 @@ struct TimerScreen_Previews: PreviewProvider {
     }
 }
 
+struct StalingradLogo: View {
+    
+    @Binding var bigLogoAnimate: Bool
+    
+    var body: some View {
+        Image("StalingradLogo")
+            .resizable()
+            .scaledToFill()
+            .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
+            .offset(y: 40)
+            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
+//            .opacity(bigLogoAnimate ? 1 : 0)
+                        .animation(.easeInOut)
+            .padding()
+            .onAppear() {
+                bigLogoAnimate = true
+            }
+        
+    }
+}
+
+struct RoundsTotaltimeCycles: View {
+    @ObservedObject var timerManager: TimerManager
+    var body: some View {
+        VStack {
+            HStack {
+                // Rounds
+                VStack {
+                    // userRounds - ruonds. if == 0 {"1"}
+                    Text("\(timerManager.usersRounds - timerManager.rounds + 1)")
+                        .font(.custom("HelveticaNeue-Thin", size: 38))
+                        //                            .fontWeight(.regular)
+                        +
+                        Text("/\(timerManager.usersRounds)")
+                        .font(.custom("HelveticaNeue-Thin", size: 28))
+                        .fontWeight(.ultraLight)
+                }
+                .frame(maxWidth: .infinity)
+                
+                // Total time
+                VStack {
+                    Text("\(secondsToMinutesAndSeconds(seconds: timerManager.totalTime) )")
+                        .font(.custom("HelveticaNeue-Thin", size: 38))
+                        .minimumScaleFactor(0.5)
+                        .scaledToFit()
+                        .animation(.none)
+                    
+                }
+                .frame(maxWidth: .infinity)
+                
+                // Cycles
+                VStack {
+                    Text(timerManager.usersCycles == 0 ? "" : "\(timerManager.cycles)")
+                        .font(.custom("HelveticaNeue-Thin", size: 38))
+                        //                            .fontWeight(.regular)
+                        +
+                        Text(timerManager.usersCycles == 0 ? "" : "/\(timerManager.usersCycles)")
+                        
+                        .font(.custom("HelveticaNeue-Thin", size: 28))
+                        .fontWeight(.ultraLight)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            
+            .foregroundColor(.black)
+//            .background(Color.white)
+            
+            HStack {
+                Text("РАУНДЫ")
+                    .font(.custom("HelveticaNeue-Thin", size: 16))
+                    .fontWeight(.ultraLight)
+                    .frame(maxWidth: .infinity)
+                Text("ОСТАЛОСЬ")
+                    .font(.custom("HelveticaNeue-Thin", size: 16))
+                    .fontWeight(.ultraLight)
+                    .frame(maxWidth: .infinity)
+                Text(timerManager.usersCycles == 0 ? "" : "ЦИКЛЫ")
+                    .font(.custom("HelveticaNeue-Thin", size: 16))
+                    .fontWeight(.ultraLight)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+    }
+}

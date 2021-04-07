@@ -13,10 +13,10 @@ class TimerManager: ObservableObject {
     
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    @Published var usersPrepareTime: Float = 10
-    @Published var usersWorkTime: Float = 20
-    @Published var usersRestTime: Float = 5
-    @Published var usersRounds = 3
+    @Published var usersPrepareTime: Float = 3
+    @Published var usersWorkTime: Float = 3
+    @Published var usersRestTime: Float = 3
+    @Published var usersRounds = 1
     @Published var usersCycles = 1
     
     @Published var currentTime: Float = 0 // seconds
@@ -38,11 +38,11 @@ class TimerManager: ObservableObject {
     
     func startTimer() {
         print(#function)
-        
+       
         if trainMode == .initial {
             setTimerValues()
             totalTime = (((usersWorkTime + usersRestTime) * Float(usersRounds)) * Float(usersCycles)) - restTime
-//            totalTime = 86400 - maximum (24 chasa)
+//            totalTime = 86400 - maximum (24 h)
             rounds = usersRounds
             cycles = usersCycles
 
@@ -72,7 +72,9 @@ class TimerManager: ObservableObject {
     
     @objc func updateTimerValue() {
 //        print(#function)
-        
+//        if currentTime < 0 {
+//            resetTimer()
+//        }
         totalTime -= 1
         
         currentTime -= 1
