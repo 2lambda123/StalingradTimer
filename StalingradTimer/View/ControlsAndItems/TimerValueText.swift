@@ -18,26 +18,25 @@ struct TimerValueText: View {
     var body: some View {
         VStack {
             ZStack {
-                    Group{
+                    
                         Text(timerText)
-                            .font(.custom("HelveticaNeue-Light", fixedSize: 110))
+                            .font(.custom("HelveticaNeue", fixedSize: 140))
                             .modifier(ShadowForViews())
                             .foregroundColor(Color.black)
                             .lineLimit(1)
 //                            .shadowForView()
+                            .minimumScaleFactor(0.1)
                         Text(trainName)
                             .font(.custom("HelveticaNeue-Thin", size: 35))
                             // GurmukhiMN, EuphemiaUCAS, HelveticaNeue-Medium, HelveticaNeue-Thin
-                            .shadowForView()
                             .offset(x: 0, y: -((UIScreen.main.bounds.width) / 4))
-                    }
-                    .rotationEffect(.init(degrees: 90))
-               
             }
-            .frame(maxWidth:  UIScreen.main.bounds.width - 32, maxHeight: UIScreen.main.bounds.width - 32)
-            .rotationEffect(.init(degrees: -90))
+            
+//            .frame(maxWidth:  UIScreen.main.bounds.width - 32, maxHeight: UIScreen.main.bounds.width - 32)
             
         }
+        .padding()
+        .padding()
         
     }
 }
