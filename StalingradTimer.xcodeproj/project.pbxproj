@@ -13,6 +13,7 @@
 		0425309225FAB48F0061C318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309125FAB48F0061C318 /* Assets.xcassets */; };
 		0425309525FAB48F0061C318 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309425FAB48F0061C318 /* Preview Assets.xcassets */; };
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
+		0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */; };
 		04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEAD25FCE8D400254588 /* TimerManager.swift */; };
 		04A9EEB325FCE91C00254588 /* TrainMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEB225FCE91C00254588 /* TrainMode.swift */; };
 		04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEBF25FCEB6F00254588 /* Helper.swift */; };
@@ -33,6 +34,7 @@
 		0425309425FAB48F0061C318 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0425309625FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
+		0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsScreen.swift; sourceTree = "<group>"; };
 		04A9EEAD25FCE8D400254588 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		04A9EEB225FCE91C00254588 /* TrainMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainMode.swift; sourceTree = "<group>"; };
 		04A9EEBF25FCEB6F00254588 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				042530BB25FAB59E0061C318 /* TimerScreen.swift */,
 				0417ECB22603EF39009D5F10 /* TestUIPage.swift */,
 				04ADFAF9262F6B1D00BF29D1 /* SettingsScreen.swift */,
+				0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */,
 				04A9EEC525FCEBB200254588 /* ControlsAndItems */,
 				04A9EEC425FCEB9B00254588 /* Modifiers */,
 			);
@@ -213,6 +216,7 @@
 			files = (
 				04A9EED925FCFF0F00254588 /* TimerValueText.swift in Sources */,
 				0425309025FAB48C0061C318 /* ContentView.swift in Sources */,
+				0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */,
 				04A9EECF25FCEBFF00254588 /* StartPauseButton.swift in Sources */,
 				04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */,
 				04A9EEB325FCE91C00254588 /* TrainMode.swift in Sources */,

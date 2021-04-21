@@ -28,7 +28,11 @@ struct TestUIPage: View {
                             Image(systemName: "gearshape")
                                 .font(.system(size: 35, weight: .light))
                                 .foregroundColor(.black)
-                        } .sheet(isPresented: $showSettings) {
+                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+                                .animation(.default)
+                        }
+                        .disabled(timerManager.trainMode != .initial)
+                        .sheet(isPresented: $showSettings) {
                             SettingsScreen()
                         }
                         
@@ -210,6 +214,6 @@ struct TestUIPage_Previews: PreviewProvider {
         }
 //                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
 //                    .animation(.easeIn(duration: 0.5))
-        .transition(.scale)
+//        .transition(.scale)
     }
 }

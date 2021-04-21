@@ -11,7 +11,8 @@ struct TimerScreen: View {
     
     @ObservedObject private var timerManager = TimerManager()
     
-    
+    @State private var showSettings = false
+    @State private var showTimerSettings = false
     
     private let bigLogo = "StalingradLogo"
     @State private var bigLogoAnimate = true
@@ -24,16 +25,34 @@ struct TimerScreen: View {
                 //MARK: - "NavigationBar"
                 VStack {
                     HStack {
-                        Image(systemName: "gearshape")
-                            .font(.system(size: 35, weight: .light))
-                            .foregroundColor(.black)
+                        Button(action: {showSettings.toggle()}) {
+                            Image(systemName: "gearshape")
+                                .font(.system(size: 35, weight: .light))
+                                .foregroundColor(.black)
+                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+                                .rotationEffect(.init(degrees: showSettings ? 0 : 90))
+                                .animation(.default)
+                                
+                        }
+                        .disabled(timerManager.trainMode != .initial)
+                        .sheet(isPresented: $showSettings) {
+                            SettingsScreen()
+                        }
                         
                         Spacer()
                         
-                        Image(systemName: "stopwatch")
-                            .font(.system(size: 35, weight: .light))
-                            .foregroundColor(.black)
-                            .shadowForView()
+                        Button(action: {showTimerSettings.toggle()}) {
+                            Image(systemName: "stopwatch")
+                                .font(.system(size: 35, weight: .light))
+                                .foregroundColor(.black)
+                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+//                                .rotationEffect(.init(degrees: showSettings ? 0 : 90))
+                                .animation(.default)
+                        }
+                        .disabled(timerManager.trainMode != .initial)
+                        .sheet(isPresented: $showTimerSettings) {
+                            TimerSettingsScreen()
+                        }
                     }
                 }
                 // MARK: - Time + trainig mode
@@ -112,10 +131,11 @@ struct TimerScreen: View {
 }
 struct TimerScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TabView {
+//        TabView {
             TimerScreen()
             
-        }
+//        }
+        
         
     }
 }
