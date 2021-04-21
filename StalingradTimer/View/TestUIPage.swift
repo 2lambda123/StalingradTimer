@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
-/*
+
 struct TestUIPage: View {
 
     @ObservedObject private var timerManager = TimerManager()
     
+    @State private var showSettings = false
+    
     private let bigLogo = "StalingradLogo"
-//    @State private var bigLogoScaleEffect:CGFloat = 0.5
     @State private var bigLogoAnimate = true
+    @State private var totalOpacityAn: Double = 0
     
     var body: some View {
         
@@ -22,9 +24,14 @@ struct TestUIPage: View {
                 //MARK: - "NavigationBar"
                 VStack {
                     HStack {
-                        Image(systemName: "gearshape")
-                            .font(.system(size: 35, weight: .light))
-                            .foregroundColor(.black)
+                        Button(action: {showSettings.toggle()}) {
+                            Image(systemName: "gearshape")
+                                .font(.system(size: 35, weight: .light))
+                                .foregroundColor(.black)
+                        } .sheet(isPresented: $showSettings) {
+                            SettingsScreen()
+                        }
+                        
                         
                         Spacer()
                         
@@ -45,38 +52,50 @@ struct TestUIPage: View {
                             timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
                             trainName: timerManager.getTrainModeName()
                         )
-                            .animation(.none)
-                            //TODO: - if isOn Нажмите на время, чтобы прибавить его. + сделать выбор шага
+                        .animation(.none)
                         .onTapGesture {
-                                timerManager.addTime()
-                            }
+                            timerManager.addTime()
+                        }
                     }
                     // MARK: - Stalingrad Logo
+                    
                     if timerManager.trainMode == .initial {
-                        StalingradLogo(bigLogoAnimate: $bigLogoAnimate)
+                            StalingradLogoTest(bigLogoAnimate: $bigLogoAnimate)
+                               
                     }
                 }
-//                .animation(.default)
-                .padding(.bottom)
                 
-                //                Spacer()
+                Spacer().frame(height: 16)
                 
                 //MARK: - Rounds and cycles
-                RoundsTotaltimeCycles(timerManager: timerManager )
-                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
-                    .animation(.default)
-//                timerManager.trainMode != .initial ?  RoundsTotaltimeCycles() : nil
-                        
-                
+                timerManager.trainMode != .initial ?
+                    RoundsTotaltimeCyclesTest(timerManager: timerManager)
+                    .opacity(totalOpacityAn)
+                    .onAppear() {
+                        withAnimation(.default) {
+                            totalOpacityAn = 1
+                        }
+                    }
+                    .onDisappear() {
+                            totalOpacityAn = 0
+                    }
+                    : nil
+
                 //TODO: - add color with 2 schemes (for light and dark mode)
                 
                 Spacer()
                 
                 //MARK: - Start button
-                HStack {
-                    timerManager.startButtonOn ? StartPauseButton(action: { timerManager.startTimer(); timerManager.startButtonOn = false; bigLogoAnimate = false } , buttonText: "СТАРТ") :
-                        StartPauseButton(action: {timerManager.pauseTimer(); timerManager.startButtonOn = true } , buttonText: "ПАУЗА")
-                }
+                // TODO: - сделать кнопку ccaletofit, что добавить padding  к totaltime
+                    timerManager.startButtonOn ? StartPauseButton(action: {
+                                                                    timerManager.startTimer();
+                                                                    timerManager.startButtonOn = false;
+                                                                     bigLogoAnimate = false },
+                                                                  buttonText: "СТАРТ") :
+                                                StartPauseButton(action: {
+                                                                    timerManager.pauseTimer();
+                                                                    timerManager.startButtonOn = true },
+                                                                 buttonText: "ПАУЗА")
             }
             
             //MARK: - Reset button
@@ -84,9 +103,12 @@ struct TestUIPage: View {
                 Spacer()
                 
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); withAnimation(.easeInOut) { bigLogoAnimate = true } }, buttonColor: .red, imageName: "gobackward")
+                    ResetButton(action:  {
+                                    timerManager.resetTimer();
+                                    withAnimation(.default) { bigLogoAnimate = true } },
+                                buttonColor: .red,
+                                imageName: "gobackward")
                     Spacer()
-                    
                 }
             }
         } //Main ZStack
@@ -103,8 +125,8 @@ struct TestUIPage_Previews: PreviewProvider {
 //background-color: #6a93cb;
 //background-image: linear-gradient(315deg, #6a93cb 0%, #a4bfef 74%);
 
-struct StalingradLogo: View {
-  
+ struct StalingradLogoTest: View {
+    
     @Binding var bigLogoAnimate: Bool
     
     var body: some View {
@@ -114,6 +136,8 @@ struct StalingradLogo: View {
             .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
             .offset(y: 40)
             .scaleEffect(bigLogoAnimate ? 1 : 0.8)
+            .opacity(bigLogoAnimate ? 1 : 0)
+            .animation(.default)
             .padding()
             .onAppear() {
                 bigLogoAnimate = true
@@ -121,14 +145,15 @@ struct StalingradLogo: View {
     }
 }
 
-struct RoundsTotaltimeCycles: View {
-    @ObservedObject  var timerManager: TimerManager
+ struct RoundsTotaltimeCyclesTest: View {
+    @ObservedObject var timerManager: TimerManager
     var body: some View {
         VStack {
             HStack {
                 // Rounds
                 VStack {
-                    Text("\(timerManager.rounds)")
+                    // userRounds - ruonds. if == 0 {"1"}
+                    Text("\(timerManager.usersRounds - timerManager.rounds + 1)")
                         .font(.custom("HelveticaNeue-Thin", size: 38))
                         //                            .fontWeight(.regular)
                         +
@@ -142,14 +167,17 @@ struct RoundsTotaltimeCycles: View {
                 VStack {
                     Text("\(secondsToMinutesAndSeconds(seconds: timerManager.totalTime) )")
                         .font(.custom("HelveticaNeue-Thin", size: 38))
+                        .minimumScaleFactor(0.5)
                         .scaledToFit()
-                        .minimumScaleFactor(0.1)
+//                        .animation(.none)
+                        
+                    
                 }
                 .frame(maxWidth: .infinity)
                 
                 // Cycles
                 VStack {
-                    Text(timerManager.usersCycles == 0 ? "" : "\(timerManager.cycles)")
+                    Text(timerManager.usersCycles == 1 ? "" : "\(timerManager.usersCycles - timerManager.cycles + 1)")
                         .font(.custom("HelveticaNeue-Thin", size: 38))
                         //                            .fontWeight(.regular)
                         +
@@ -160,9 +188,10 @@ struct RoundsTotaltimeCycles: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+
             
             .foregroundColor(.black)
-            .background(Color.white)
+//            .background(Color.white)
             
             HStack {
                 Text("РАУНДЫ")
@@ -179,6 +208,8 @@ struct RoundsTotaltimeCycles: View {
                     .frame(maxWidth: .infinity)
             }
         }
+//                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
+//                    .animation(.easeIn(duration: 0.5))
+        .transition(.scale)
     }
 }
- */

@@ -20,7 +20,7 @@ struct TimerValueText: View {
             ZStack {
                     
                         Text(timerText)
-                            .font(.custom("HelveticaNeue-Light", fixedSize: 140))
+                            .font(.custom("HelveticaNeue", fixedSize: 140))
                             .modifier(ShadowForViews())
                             .foregroundColor(Color.black)
                             .lineLimit(1)

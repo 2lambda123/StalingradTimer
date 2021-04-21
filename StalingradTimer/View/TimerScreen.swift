@@ -11,9 +11,11 @@ struct TimerScreen: View {
     
     @ObservedObject private var timerManager = TimerManager()
     
+    
+    
     private let bigLogo = "StalingradLogo"
-    //    @State private var bigLogoScaleEffect:CGFloat = 0.5
     @State private var bigLogoAnimate = true
+    @State private var totalOpacityAn: Double = 0
     
     var body: some View {
         
@@ -51,19 +53,29 @@ struct TimerScreen: View {
                         }
                     }
                     // MARK: - Stalingrad Logo
+                    
                     if timerManager.trainMode == .initial {
-                        StalingradLogo(bigLogoAnimate: $bigLogoAnimate)
+                            StalingradLogo(bigLogoAnimate: $bigLogoAnimate)
+                               
                     }
                 }
-//                .padding(.bottom)
                 
                 Spacer().frame(height: 16)
-                //MARK: - Rounds and cycles
-                RoundsTotaltimeCycles(timerManager: timerManager )
-                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
-                    .animation(.easeIn(duration: 0.15))
-//                    .padding(.top)
                 
+                //MARK: - Rounds and cycles
+                timerManager.trainMode != .initial ?
+                    RoundsTotaltimeCycles(timerManager: timerManager)
+                    .opacity(totalOpacityAn)
+                    .onAppear() {
+                        withAnimation(.default) {
+                            totalOpacityAn = 1
+                        }
+                    }
+                    .onDisappear() {
+                            totalOpacityAn = 0
+                    }
+                    : nil
+
                 //TODO: - add color with 2 schemes (for light and dark mode)
                 
                 Spacer()
@@ -73,7 +85,7 @@ struct TimerScreen: View {
                     timerManager.startButtonOn ? StartPauseButton(action: {
                                                                     timerManager.startTimer();
                                                                     timerManager.startButtonOn = false;
-                                                                    bigLogoAnimate = false },
+                                                                     bigLogoAnimate = false },
                                                                   buttonText: "СТАРТ") :
                                                 StartPauseButton(action: {
                                                                     timerManager.pauseTimer();
@@ -88,7 +100,7 @@ struct TimerScreen: View {
                 HStack {
                     ResetButton(action:  {
                                     timerManager.resetTimer();
-                                    withAnimation(.easeInOut) { bigLogoAnimate = true } },
+                                    withAnimation(.default) { bigLogoAnimate = true } },
                                 buttonColor: .red,
                                 imageName: "gobackward")
                     Spacer()
@@ -119,13 +131,12 @@ struct StalingradLogo: View {
             .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
             .offset(y: 40)
             .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-//            .opacity(bigLogoAnimate ? 1 : 0)
-                        .animation(.easeInOut)
+            .opacity(bigLogoAnimate ? 1 : 0)
+            .animation(.default)
             .padding()
             .onAppear() {
                 bigLogoAnimate = true
             }
-        
     }
 }
 
@@ -153,14 +164,15 @@ struct RoundsTotaltimeCycles: View {
                         .font(.custom("HelveticaNeue-Thin", size: 38))
                         .minimumScaleFactor(0.5)
                         .scaledToFit()
-                        .animation(.none)
+//                        .animation(.none)
+                        
                     
                 }
                 .frame(maxWidth: .infinity)
                 
                 // Cycles
                 VStack {
-                    Text(timerManager.usersCycles == 0 ? "" : "\(timerManager.cycles)")
+                    Text(timerManager.usersCycles == 1 ? "" : "\(timerManager.usersCycles - timerManager.cycles + 1)")
                         .font(.custom("HelveticaNeue-Thin", size: 38))
                         //                            .fontWeight(.regular)
                         +
@@ -171,6 +183,7 @@ struct RoundsTotaltimeCycles: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+
             
             .foregroundColor(.black)
 //            .background(Color.white)
@@ -190,5 +203,8 @@ struct RoundsTotaltimeCycles: View {
                     .frame(maxWidth: .infinity)
             }
         }
+//                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
+//                    .animation(.easeIn(duration: 0.5))
+        .transition(.scale)
     }
 }

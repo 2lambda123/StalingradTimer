@@ -16,8 +16,8 @@ class TimerManager: ObservableObject {
     @Published var usersPrepareTime: Float = 3
     @Published var usersWorkTime: Float = 3
     @Published var usersRestTime: Float = 3
-    @Published var usersRounds = 1
-    @Published var usersCycles = 1
+    @Published var usersRounds = 2
+    @Published var usersCycles = 2
     
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
@@ -42,6 +42,8 @@ class TimerManager: ObservableObject {
         if trainMode == .initial {
             setTimerValues()
             totalTime = (((usersWorkTime + usersRestTime) * Float(usersRounds)) * Float(usersCycles)) - restTime
+//            totalTime = (((workTime) * Float(rounds)) * Float(cycles))
+
 //            totalTime = 86400 - maximum (24 h)
             rounds = usersRounds
             cycles = usersCycles
@@ -60,7 +62,9 @@ class TimerManager: ObservableObject {
                 
             }
         }
-
+//        if currentTime == 0 && cycles == 0 {
+//            resetTimer()
+//        }
         timer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
@@ -72,20 +76,22 @@ class TimerManager: ObservableObject {
     
     @objc func updateTimerValue() {
 //        print(#function)
-//        if currentTime < 0 {
-//            resetTimer()
-//        }
+       
+        
         totalTime -= 1
         
         currentTime -= 1
-        
+        //prepare
         if currentTime < 0 && trainMode == .prepare {
             totalTime += 1
             trainMode = .work
             currentTime = workTime
         }
+        //work
         if currentTime < 0 && trainMode == .work {
-            if rounds == 1 && cycles > 0 {
+            
+            if rounds == 1 && cycles == 1 {
+                rounds -= 1
                 restTime = 0
                 resetTimer()
             } else {
@@ -104,13 +110,15 @@ class TimerManager: ObservableObject {
         
         if rounds == 0 {
             cycles -= 1
-            
+            setTimerValues()
+            rounds = usersRounds
         }
     
         if cycles == 0 {
             resetTimer()
         }
-        print("currentTime: \(currentTime) trainMode: \(trainMode)")
+        print("currentTime: \(currentTime) trainMode: \(trainMode)  rounds left: \(rounds) cycles left: \(cycles)")
+//        print("rounds left: \(rounds) cycles left: \(cycles)")
     }
   
     func getTrainModeName() -> String {
@@ -134,7 +142,7 @@ class TimerManager: ObservableObject {
         print(#function)
         
         trainMode = .initial
-//        currentTime = 0
+        currentTime = 0
         
         timer?.invalidate()
         timer = nil
@@ -143,8 +151,6 @@ class TimerManager: ObservableObject {
         
     }
   
-    
-    
     func addTime() {
         if trainMode == .work && currentTime < workTime {
           currentTime += 1
@@ -163,12 +169,12 @@ class TimerManager: ObservableObject {
         case .cycleRest : progressValue = 0
         }
 
-        
         return progressValue
     }
     
     private func setTimerValues() {
-        print("rounds left: \(rounds)")
+//        print("rounds left: \(rounds)")
+//        print("cycles left: \(cycles)")
         prepareTime = usersPrepareTime
         workTime = usersWorkTime
         restTime = usersRestTime
