@@ -11,7 +11,7 @@ import SwiftUI
 struct StalingradTimerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           TimerScreen()
         }
     }
 }
