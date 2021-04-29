@@ -30,7 +30,6 @@ struct TimerScreen: View {
                                 .font(.system(size: 35, weight: .light))
                                 .foregroundColor(.black)
                                 .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                                .rotationEffect(.init(degrees: showSettings ? 0 : 90))
                                 .animation(.default)
                                 
                         }
@@ -122,11 +121,15 @@ struct TimerScreen: View {
                                     withAnimation(.default) { bigLogoAnimate = true } },
                                 buttonColor: .red,
                                 imageName: "gobackward")
+                        .disabled(timerManager.trainMode == .initial)
+                        .opacity(timerManager.trainMode == .initial ? 0.5 : 1)
+                        .animation(.default)
                     Spacer()
                 }
             }
         } //Main ZStack
         .padding()
+//        .padding(.bottom)
     }
 }
 struct TimerScreen_Previews: PreviewProvider {

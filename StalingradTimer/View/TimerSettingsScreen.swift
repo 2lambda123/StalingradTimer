@@ -18,9 +18,14 @@ struct TimerSettingsScreen: View {
         Form {
          
             Section(header: Text("")){
-               
-                    DatePicker("Подготовка", selection: $currentDate, displayedComponents: .hourAndMinute)
-//                        .datePickerStyle(FieldDatePickerStyle())
+                HStack {
+                    Text("Подготовка")
+                    DatePicker("", selection: $currentDate, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .labelsHidden()
+                }
+                
+
             }
             Section(header: Text("")){
                     DatePicker("Тренировка", selection: $currentDate, displayedComponents: .hourAndMinute)
