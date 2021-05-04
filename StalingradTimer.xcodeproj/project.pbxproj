@@ -14,6 +14,8 @@
 		0425309525FAB48F0061C318 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309425FAB48F0061C318 /* Preview Assets.xcassets */; };
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
 		0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */; };
+		0490AF14263B3CCF004ED3A4 /* TimePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */; };
+		0490AF18263B44BE004ED3A4 /* TestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF17263B44BE004ED3A4 /* TestPicker.swift */; };
 		04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEAD25FCE8D400254588 /* TimerManager.swift */; };
 		04A9EEB325FCE91C00254588 /* TrainMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEB225FCE91C00254588 /* TrainMode.swift */; };
 		04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A9EEBF25FCEB6F00254588 /* Helper.swift */; };
@@ -35,6 +37,8 @@
 		0425309625FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
 		0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsScreen.swift; sourceTree = "<group>"; };
+		0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerForm.swift; sourceTree = "<group>"; };
+		0490AF17263B44BE004ED3A4 /* TestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPicker.swift; sourceTree = "<group>"; };
 		04A9EEAD25FCE8D400254588 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		04A9EEB225FCE91C00254588 /* TrainMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainMode.swift; sourceTree = "<group>"; };
 		04A9EEBF25FCEB6F00254588 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 		04A9EEC525FCEBB200254588 /* ControlsAndItems */ = {
 			isa = PBXGroup;
 			children = (
+				0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */,
+				0490AF17263B44BE004ED3A4 /* TestPicker.swift */,
 				04A9EED825FCFF0F00254588 /* TimerValueText.swift */,
 				04ED25AD260F5B4B00FAD03D /* CircleProgressBar.swift */,
 				04A9EEBF25FCEB6F00254588 /* Helper.swift */,
@@ -216,12 +222,14 @@
 			files = (
 				04A9EED925FCFF0F00254588 /* TimerValueText.swift in Sources */,
 				0425309025FAB48C0061C318 /* ContentView.swift in Sources */,
+				0490AF14263B3CCF004ED3A4 /* TimePickerForm.swift in Sources */,
 				0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */,
 				04A9EECF25FCEBFF00254588 /* StartPauseButton.swift in Sources */,
 				04A9EEAE25FCE8D400254588 /* TimerManager.swift in Sources */,
 				04A9EEB325FCE91C00254588 /* TrainMode.swift in Sources */,
 				04A9EED425FCEC4100254588 /* ResetButton.swift in Sources */,
 				04ED25AE260F5B4B00FAD03D /* CircleProgressBar.swift in Sources */,
+				0490AF18263B44BE004ED3A4 /* TestPicker.swift in Sources */,
 				04ADFAFA262F6B1D00BF29D1 /* SettingsScreen.swift in Sources */,
 				042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */,
 				0425308E25FAB48C0061C318 /* StalingradTimerApp.swift in Sources */,

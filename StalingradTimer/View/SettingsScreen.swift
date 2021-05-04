@@ -105,11 +105,15 @@ struct SettingsScreen: View {
                 .navigationBarTitle(Text("Настройки"), displayMode: .inline)
                 } // navigationView
             if showButton {
-                StartPauseButton(action: {}, buttonText: "TEST")
+//                StartPauseButton(action: {}, buttonText: "TEST")
+//                GeometryReader { _ in
+                    
+                TimePickerForm(OKAction: {print("checkmark")}, cancelAction: {print("xmark button pressed")})
+//
             }
-            }//ZStack
-        }
+        }//ZStack
     }
+}
 
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
