@@ -68,13 +68,18 @@ struct TimePickerForm: View {
                 }
             
             VStack {
-                
-                HStack(spacing: 0) {
+                Text("Подготовка")
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                    .font(.custom("HelveticaNeue", fixedSize: 20))
+                Divider()
+                HStack(spacing: 2) {
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
                             Text("\(self.minutesArray[index])")
+                                .fontWeight(.light)
                                 .foregroundColor(.black)
-                                .font(.custom("HelveticaNeue", fixedSize: 25))
+                                .font(.custom("HelveticaNeue", fixedSize: 30))
                                 //                                .font(.custom("HelveticaNeue", size: 38))
                                 //                            Text("")
                                 .tag(index)
@@ -91,14 +96,16 @@ struct TimePickerForm: View {
                     Picker(selection: self.self.$secondSelection, label: Text("")) {
                         ForEach(0 ..< self.secondsArray.count) { index in
                             Text("\(self.secondsArray[index])")
+                                .fontWeight(.light)
                                 .foregroundColor(.black)
-                                .font(.custom("HelveticaNeue", fixedSize: 25))
+                                .font(.custom("HelveticaNeue", fixedSize: 30))
 
                                 //                                .font(.custom("HelveticaNeue", size: 38))
                                 //                            Text("")
                                 .tag(index)
                         }
                     }
+                    
                     .labelsHidden()
                     .onChange(of: self.secondSelection) { newValue in
                         seconds = totalInSeconds
@@ -121,13 +128,13 @@ struct TimePickerForm: View {
                 .offset(x: 0, y: 5)
                 
             }// Vstack
-            .frame(width: 200, height: 200)
+            .frame(width: 200, height: 240)
             .background(Color.white)
             .cornerRadius(15)
 //            .clipped()
             
             CancelButton(action: cancelAction)
-                .offset(x: 95, y: -95)
+                .offset(x: 100, y: -120)
         } // Zstack
        
     }

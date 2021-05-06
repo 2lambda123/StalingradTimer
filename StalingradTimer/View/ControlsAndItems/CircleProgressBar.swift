@@ -27,6 +27,7 @@ struct CircleProgressBar: View {
 //                .animation(.easeOut) // if step 1
                 //                    .animation(.easeIn(duration: 0.3))
                 //                    .animation(.default) // if step 0.1
+                .animation(.easeOut(duration: 0.5), value: trimTo)
                 .shadowForView()
             
 //            Image("322")

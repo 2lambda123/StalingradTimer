@@ -11,7 +11,11 @@ import SwiftUI
 struct StalingradTimerApp: App {
     var body: some Scene {
         WindowGroup {
-           TimerScreen()
+//            NavigationView{
+                TimerScreen()
+                    
+//                    .navigationBarHidden(true)
+//            }
         }
     }
 }

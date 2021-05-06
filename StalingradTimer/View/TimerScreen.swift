@@ -20,23 +20,26 @@ struct TimerScreen: View {
     
     var body: some View {
         
+        NavigationView {
         ZStack {
             VStack {
                 //MARK: - "NavigationBar"
-                VStack {
+//                VStack {
                     HStack {
-                        Button(action: {showSettings.toggle()}) {
-                            Image(systemName: "gearshape")
-                                .font(.system(size: 35, weight: .light))
-                                .foregroundColor(.black)
-                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                                .animation(.default)
-                                
-                        }
-                        .disabled(timerManager.trainMode != .initial)
-                        .sheet(isPresented: $showSettings) {
-                            SettingsScreen()
-                        }
+                        //MARK: - Settings Button
+                        SettingsButton(timerManager: timerManager)
+//                        Button(action: {showSettings.toggle()}) {
+//                            Image(systemName: "gearshape")
+//                                .font(.system(size: 35, weight: .light))
+//                                .foregroundColor(.black)
+//                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+//                                .animation(.default)
+//
+//                        }
+//                        .disabled(timerManager.trainMode != .initial)
+//                        .sheet(isPresented: $showSettings) {
+//                            SettingsScreen()
+//                        }
                         
                         Spacer()
                         
@@ -53,19 +56,19 @@ struct TimerScreen: View {
                             TimerSettingsScreen()
                         }
                     }
-                }
+//                }
                 // MARK: - Time + trainig mode
                 ZStack {
                     
                     CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
-                        .animation(.easeOut(duration: 0.5))
+//                        .animation(.easeOut(duration: 0.5))
                     
                     if timerManager.trainMode != .initial {
                         TimerValueText(
                             timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
                             trainName: timerManager.getTrainModeName()
                         )
-                        .animation(.none)
+                        .animation(.default)
                         .onTapGesture {
                             timerManager.addTime()
                         }
@@ -73,12 +76,15 @@ struct TimerScreen: View {
                     // MARK: - Stalingrad Logo
                     
                     if timerManager.trainMode == .initial {
-                            StalingradLogo(bigLogoAnimate: $bigLogoAnimate)
-                               
+                            StalingradLogo()
+//                            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
+//                            .opacity(bigLogoAnimate ? 1 : 0.1)
+//                            .animation(.default)
                     }
                 }
                 
-                Spacer().frame(height: 16)
+                Spacer()
+                    .frame(height: 16)
                 
                 //MARK: - Rounds and cycles
                 timerManager.trainMode != .initial ?
@@ -99,7 +105,7 @@ struct TimerScreen: View {
                 Spacer()
                 
                 //MARK: - Start button
-                // TODO: - сделать кнопку ccaletofit, что добавить padding  к totaltime
+//                 TODO: - сделать кнопку ccaletofit, что добавить padding  к totaltime
                     timerManager.startButtonOn ? StartPauseButton(action: {
                                                                     timerManager.startTimer();
                                                                     timerManager.startButtonOn = false;
@@ -127,39 +133,44 @@ struct TimerScreen: View {
                     Spacer()
                 }
             }
-        } //Main ZStack
+        }
+        .onAppear() {
+            
+        }//Main ZStack
         .padding()
 //        .padding(.bottom)
+//        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
+        }
+        
+        
     }
 }
 struct TimerScreen_Previews: PreviewProvider {
     static var previews: some View {
-//        TabView {
             TimerScreen()
-            
-//        }
-        
-        
     }
 }
 
 struct StalingradLogo: View {
-    
-    @Binding var bigLogoAnimate: Bool
+    @ObservedObject var timerManager = TimerManager()
+//    @Binding var bigLogoAnimate: Bool
     
     var body: some View {
         Image("StalingradLogo")
+//        Image(systemName: "questionmark.circle")
             .resizable()
             .scaledToFill()
             .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
             .offset(y: 40)
-            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-            .opacity(bigLogoAnimate ? 1 : 0)
-            .animation(.default)
+//            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
+//            .opacity(bigLogoAnimate ? 1 : 0.1)
+//            .animation(.default)
             .padding()
-            .onAppear() {
-                bigLogoAnimate = true
-            }
+        
+//            .onAppear() {
+//                bigLogoAnimate = true
+//            }
     }
 }
 
@@ -229,5 +240,19 @@ struct RoundsTotaltimeCycles: View {
 //                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
 //                    .animation(.easeIn(duration: 0.5))
         .transition(.scale)
+    }
+}
+
+struct SettingsButton: View {
+    var buttonOpacity: Double = 0.5
+    @ObservedObject var timerManager: TimerManager
+    var body: some View {
+        NavigationLink(destination: SettingsScreen()) {
+            Image(systemName: "gearshape")
+                .font(.system(size: 35, weight: .light))
+                .foregroundColor(.black)
+                .opacity(timerManager.trainMode != .initial ? buttonOpacity : 1)
+                .animation(.default, value: buttonOpacity)
+        }
     }
 }

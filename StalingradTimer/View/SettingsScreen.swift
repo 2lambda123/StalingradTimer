@@ -30,7 +30,7 @@ struct SettingsScreen: View {
     
     var body: some View {
         ZStack {
-            NavigationView {
+            
                 
                 Form {
                     Section(header: Text("")){
@@ -101,8 +101,9 @@ struct SettingsScreen: View {
 //                            }
 //                        }
 //                        .pickerStyle(InlinePickerStyle())
-                    } // Form
+                     // Form
                 .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+//                    .navigationBarItems(leading: )
                 } // navigationView
             if showButton {
 //                StartPauseButton(action: {}, buttonText: "TEST")
@@ -118,6 +119,7 @@ struct SettingsScreen: View {
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         SettingsScreen()
+            
             
     }
 }

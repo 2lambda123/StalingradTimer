@@ -11,6 +11,8 @@ import Combine
 
 class TimerManager: ObservableObject {
     
+    
+    
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
     @Published var usersPrepareTime: Float = 3
@@ -23,6 +25,7 @@ class TimerManager: ObservableObject {
     @Published var totalTime: Float = 0
     
     @Published var trainMode: TrainMode = .initial
+    
     
     @Published var startButtonOn = true
     
