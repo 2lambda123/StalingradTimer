@@ -11,22 +11,23 @@ struct TimerValueText: View {
     
 //    @ObservedObject private var timerManager = TimerManager(userWorkTimeSet: 20)
     
-    var timerText: String
-    var trainName: String
+    var timerValue: String
+    var trainMode: String
 //    var trimTo: CGFloat
     
     var body: some View {
         VStack {
             ZStack {
                     
-                        Text(timerText)
+                        Text(timerValue)
                             .font(.custom("HelveticaNeue", fixedSize: 140))
                             .modifier(ShadowForViews())
                             .foregroundColor(Color.black)
                             .lineLimit(1)
 //                            .shadowForView()
                             .minimumScaleFactor(0.1)
-                        Text(trainName)
+                        Text(trainMode)
+                            .italic()
                             .font(.custom("HelveticaNeue-Thin", size: 35))
                             // GurmukhiMN, EuphemiaUCAS, HelveticaNeue-Medium, HelveticaNeue-Thin
                             .offset(x: 0, y: -((UIScreen.main.bounds.width) / 4))
@@ -43,7 +44,7 @@ struct TimerValueText: View {
 
 struct TimerValueText_Previews: PreviewProvider {
     static var previews: some View {
-        TimerValueText(timerText: "59:11", trainName: "Тренировка")
+        TimerValueText(timerValue: "59:11", trainMode: "Тренировка")
             .padding()
     }
 }

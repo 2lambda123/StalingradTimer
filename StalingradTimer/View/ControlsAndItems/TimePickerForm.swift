@@ -69,6 +69,7 @@ struct TimePickerForm: View {
             
             VStack {
                 Text("Подготовка")
+                    .italic()
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .font(.custom("HelveticaNeue", fixedSize: 20))
@@ -99,10 +100,8 @@ struct TimePickerForm: View {
                                 .fontWeight(.light)
                                 .foregroundColor(.black)
                                 .font(.custom("HelveticaNeue", fixedSize: 30))
-
-                                //                                .font(.custom("HelveticaNeue", size: 38))
-                                //                            Text("")
                                 .tag(index)
+                            
                         }
                     }
                     
@@ -118,6 +117,7 @@ struct TimePickerForm: View {
                     .foregroundColor(.red)
                 Button(action: OKAction) {
                     Text("OK")
+                        .italic()
                         .fontWeight(.bold)
                         .foregroundColor(.red)
                         .font(.custom("HelveticaNeue", fixedSize: 20))

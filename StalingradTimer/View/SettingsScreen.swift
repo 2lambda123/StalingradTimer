@@ -30,8 +30,6 @@ struct SettingsScreen: View {
     
     var body: some View {
         ZStack {
-            
-                
                 Form {
                     Section(header: Text("")){
                         HStack {
@@ -39,9 +37,11 @@ struct SettingsScreen: View {
                                 .resizable()
                                 .scaledToFit()
                                 .cornerRadius(10)
+                                .frame(width: 70, height: 70)
                             
                             VStack(alignment: .leading) {
                                 Text("STALINGRAD таймер")
+                                    .italic()
                                     .font(.custom("HelveticaNeue", fixedSize: 20))
                                     .modifier(ShadowForViews())
                                     .foregroundColor(Color.black)
@@ -102,7 +102,7 @@ struct SettingsScreen: View {
 //                        }
 //                        .pickerStyle(InlinePickerStyle())
                      // Form
-                .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+                
 //                    .navigationBarItems(leading: )
                 } // navigationView
             if showButton {
@@ -113,6 +113,8 @@ struct SettingsScreen: View {
 //
             }
         }//ZStack
+        .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+
     }
 }
 
@@ -123,4 +125,15 @@ struct SettingsScreen_Previews: PreviewProvider {
             
     }
 }
-
+// вместо вью - .sheet
+//Button(action: {showTimerSettings.toggle()}) {
+//    Image(systemName: "stopwatch")
+//        .font(.system(size: 35, weight: .light))
+//        .foregroundColor(.black)
+//        .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+//        .animation(.default)
+//}
+//.disabled(timerManager.trainMode != .initial)
+//.sheet(isPresented: $showTimerSettings) {
+//    TimerSettingsScreen()
+//}

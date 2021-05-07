@@ -22,8 +22,6 @@ struct TimerSettingsScreen: View {
     
     var body: some View {
         ZStack {
-            
-            NavigationView {
                 Form {
                     
                     Section(header: Text("")){
@@ -54,17 +52,20 @@ struct TimerSettingsScreen: View {
                         DatePicker("Востановление", selection: $currentDate, displayedComponents: .hourAndMinute)
                         
                     }
-                } .navigationBarTitle(Text("Установка таймера"), displayMode: .inline)
-            }
+                }
+            
         if preparePickerShow {
                 TimePickerForm(OKAction: {preparePickerShow = false}, cancelAction: {preparePickerShow = false})
             }
         } //ZStack
+        .navigationBarTitle(Text("Настройка таймера"), displayMode: .inline)
     }
 }
 
 struct TimerSettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
+        NavigationView {
         TimerSettingsScreen()
+        }
     }
 }

@@ -11,8 +11,7 @@ struct TimerScreen: View {
     
     @ObservedObject private var timerManager = TimerManager()
     
-    @State private var showSettings = false
-    @State private var showTimerSettings = false
+
     
     private let bigLogo = "StalingradLogo"
     @State private var bigLogoAnimate = true
@@ -24,51 +23,26 @@ struct TimerScreen: View {
         ZStack {
             VStack {
                 //MARK: - "NavigationBar"
-//                VStack {
                     HStack {
                         //MARK: - Settings Button
                         SettingsButton(timerManager: timerManager)
-//                        Button(action: {showSettings.toggle()}) {
-//                            Image(systemName: "gearshape")
-//                                .font(.system(size: 35, weight: .light))
-//                                .foregroundColor(.black)
-//                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-//                                .animation(.default)
-//
-//                        }
-//                        .disabled(timerManager.trainMode != .initial)
-//                        .sheet(isPresented: $showSettings) {
-//                            SettingsScreen()
-//                        }
+                            .disabled(timerManager.trainMode != .initial)
                         
                         Spacer()
                         
-                        Button(action: {showTimerSettings.toggle()}) {
-                            Image(systemName: "stopwatch")
-                                .font(.system(size: 35, weight: .light))
-                                .foregroundColor(.black)
-                                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-//                                .rotationEffect(.init(degrees: showSettings ? 0 : 90))
-                                .animation(.default)
-                        }
-                        .disabled(timerManager.trainMode != .initial)
-                        .sheet(isPresented: $showTimerSettings) {
-                            TimerSettingsScreen()
-                        }
+                        //MARK: - Timer settings Button
+                        TimerSettingsButton(timerManager: timerManager)
+                            .disabled(timerManager.trainMode != .initial)
                     }
-//                }
                 // MARK: - Time + trainig mode
                 ZStack {
                     
                     CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
-//                        .animation(.easeOut(duration: 0.5))
                     
                     if timerManager.trainMode != .initial {
-                        TimerValueText(
-                            timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
-                            trainName: timerManager.getTrainModeName()
+                        TimerValueText( timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
+                                        trainMode: timerManager.getTrainModeName()
                         )
-                        .animation(.default)
                         .onTapGesture {
                             timerManager.addTime()
                         }
@@ -76,10 +50,16 @@ struct TimerScreen: View {
                     // MARK: - Stalingrad Logo
                     
                     if timerManager.trainMode == .initial {
-                            StalingradLogo()
-//                            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-//                            .opacity(bigLogoAnimate ? 1 : 0.1)
-//                            .animation(.default)
+                        StalingradLogo()
+                            .animation(nil)
+                            .scaleEffect(bigLogoAnimate ? 1 : 0.8)
+                            .opacity(bigLogoAnimate ? 1 : 0.1)
+                            .animation(.default, value: bigLogoAnimate)
+                            .onAppear() {
+                                withAnimation(.default) {
+                                    bigLogoAnimate = true
+                                }
+                            }
                     }
                 }
                 
@@ -87,7 +67,8 @@ struct TimerScreen: View {
                     .frame(height: 16)
                 
                 //MARK: - Rounds and cycles
-                timerManager.trainMode != .initial ?
+                timerManager.trainMode != .initial
+                    ?
                     RoundsTotaltimeCycles(timerManager: timerManager)
                     .opacity(totalOpacityAn)
                     .onAppear() {
@@ -98,50 +79,39 @@ struct TimerScreen: View {
                     .onDisappear() {
                             totalOpacityAn = 0
                     }
-                    : nil
+                    .offset(y: 10.0)
+                    :
+                    nil
+                    
 
                 //TODO: - add color with 2 schemes (for light and dark mode)
                 
                 Spacer()
                 
                 //MARK: - Start button
-//                 TODO: - сделать кнопку ccaletofit, что добавить padding  к totaltime
-                    timerManager.startButtonOn ? StartPauseButton(action: {
-                                                                    timerManager.startTimer();
-                                                                    timerManager.startButtonOn = false;
-                                                                     bigLogoAnimate = false },
+                    timerManager.startButtonOn ? StartPauseButton(action: { timerManager.startTimer(); timerManager.startButtonOn = false; bigLogoAnimate = false },
                                                                   buttonText: "СТАРТ") :
-                                                StartPauseButton(action: {
-                                                                    timerManager.pauseTimer();
-                                                                    timerManager.startButtonOn = true },
+                        StartPauseButton(action: { timerManager.pauseTimer(); timerManager.startButtonOn = true},
                                                                  buttonText: "ПАУЗА")
             }
             
             //MARK: - Reset button
             VStack {
                 Spacer()
-                
                 HStack {
-                    ResetButton(action:  {
-                                    timerManager.resetTimer();
-                                    withAnimation(.default) { bigLogoAnimate = true } },
-                                buttonColor: .red,
-                                imageName: "gobackward")
+                    ResetButton(action:  { timerManager.resetTimer(); withAnimation(.default) { bigLogoAnimate = true } })
                         .disabled(timerManager.trainMode == .initial)
-                        .opacity(timerManager.trainMode == .initial ? 0.5 : 1)
+                        .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.default)
+//                        .animation(.easeInOut(duration: 0))
                     Spacer()
                 }
             }
-        }
-        .onAppear() {
-            
-        }//Main ZStack
+        } //Main ZStack
         .padding()
-//        .padding(.bottom)
-//        .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(true)
-        }
+        } // NavigationView
+        
         
         
     }
@@ -158,7 +128,6 @@ struct StalingradLogo: View {
     
     var body: some View {
         Image("StalingradLogo")
-//        Image(systemName: "questionmark.circle")
             .resizable()
             .scaledToFill()
             .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
@@ -225,13 +194,16 @@ struct RoundsTotaltimeCycles: View {
             HStack {
                 Text("РАУНДЫ")
                     .font(.custom("HelveticaNeue-Thin", size: 16))
+                    .italic()
                     .fontWeight(.ultraLight)
                     .frame(maxWidth: .infinity)
                 Text("ОСТАЛОСЬ")
+                    .italic()
                     .font(.custom("HelveticaNeue-Thin", size: 16))
                     .fontWeight(.ultraLight)
                     .frame(maxWidth: .infinity)
                 Text(timerManager.usersCycles == 0 ? "" : "ЦИКЛЫ")
+                    .italic()
                     .font(.custom("HelveticaNeue-Thin", size: 16))
                     .fontWeight(.ultraLight)
                     .frame(maxWidth: .infinity)
@@ -244,15 +216,29 @@ struct RoundsTotaltimeCycles: View {
 }
 
 struct SettingsButton: View {
-    var buttonOpacity: Double = 0.5
     @ObservedObject var timerManager: TimerManager
     var body: some View {
         NavigationLink(destination: SettingsScreen()) {
             Image(systemName: "gearshape")
                 .font(.system(size: 35, weight: .light))
                 .foregroundColor(.black)
-                .opacity(timerManager.trainMode != .initial ? buttonOpacity : 1)
-                .animation(.default, value: buttonOpacity)
+                .animation(nil)
+                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+                .animation(.default)
+        }
+    }
+}
+
+struct TimerSettingsButton: View {
+    @ObservedObject var timerManager: TimerManager
+    var body: some View {
+        NavigationLink(destination: TimerSettingsScreen()) {
+            Image(systemName: "stopwatch")
+                .font(.system(size: 35, weight: .light))
+                .foregroundColor(.black)
+                .animation(nil)
+                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+                .animation(.default)
         }
     }
 }

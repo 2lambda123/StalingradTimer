@@ -20,13 +20,7 @@ struct CircleProgressBar: View {
             
             Circle()
                 .trim(from: 0, to: trimTo)
-                .stroke(Color.red,
-                        style: StrokeStyle(
-                            lineWidth: 20,
-                            lineCap: .butt))
-//                .animation(.easeOut) // if step 1
-                //                    .animation(.easeIn(duration: 0.3))
-                //                    .animation(.default) // if step 0.1
+                .stroke(Color.red, style: StrokeStyle(lineWidth: 20, lineCap: .butt))
                 .animation(.easeOut(duration: 0.5), value: trimTo)
                 .shadowForView()
             

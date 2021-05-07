@@ -53,8 +53,8 @@ struct TestUIPage: View {
                     
                     if timerManager.trainMode != .initial {
                         TimerValueText(
-                            timerText: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
-                            trainName: timerManager.getTrainModeName()
+                            timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
+                            trainMode: timerManager.getTrainModeName()
                         )
                         .animation(.none)
                         .onTapGesture {
