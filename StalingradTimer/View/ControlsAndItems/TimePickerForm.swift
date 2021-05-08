@@ -28,8 +28,8 @@ struct TimePickerForm: View {
     
      var daysArray = [Int](0..<30)
      var hoursArray = [Int](0..<23)
-     var minutesArray = [Int](0..<60)
-      var secondsArray = [Int](0..<60)
+    var minutesArray = [Int](0...59)
+    var secondsArray = [Int](0...59)
     
      let hoursInDay = 24
      let secondsInMinute = 60
@@ -39,8 +39,10 @@ struct TimePickerForm: View {
     
     @State private var daySelection = 0
     @State private var hourSelection = 0
-    @State private var minuteSelection = 1
-    @State private var secondSelection = 0
+    @State private var minuteSelection = 0
+    @State var secondSelection: Int
+    
+    
     
     private let frameHeight: CGFloat = 160
     
@@ -77,34 +79,35 @@ struct TimePickerForm: View {
                 HStack(spacing: 2) {
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
-                            Text("\(self.minutesArray[index])")
-                                .fontWeight(.light)
-                                .foregroundColor(.black)
-                                .font(.custom("HelveticaNeue", fixedSize: 30))
-                                //                                .font(.custom("HelveticaNeue", size: 38))
-                                //                            Text("")
-                                .tag(index)
+//                                Text("\(self.minutesArray[index] )")
+                            Text(index > 9 ? "\(self.minutesArray[index])" : "0" + "\(self.minutesArray[index])")
+                                    .fontWeight(.light)
+                                    .foregroundColor(.black)
+                                    .font(.custom("HelveticaNeue", fixedSize: 30))
+                                    //                                .font(.custom("HelveticaNeue", size: 38))
+                                    //                            Text("")
+                                    .tag(index)
                         }
                     }
                     .labelsHidden()
                     .onChange(of: self.minuteSelection) { newValue in
-                        seconds = totalInSeconds
+//                        seconds = totalInSeconds
                     }
                     .frame(width: 80, height: 110)
                     .clipped()
+                    
                     Text(":")
-                    //                        .font(.custom("HelveticaNeue", size: 38))
-                    Picker(selection: self.self.$secondSelection, label: Text("")) {
+                // сделать функцию, которая берет выбранное в пикере значение и присваивает его двыбранное binding переменной и засунуть ее в окАкшн
+                    Picker(selection: self.$secondSelection, label: Text("")) {
                         ForEach(0 ..< self.secondsArray.count) { index in
-                            Text("\(self.secondsArray[index])")
-                                .fontWeight(.light)
-                                .foregroundColor(.black)
-                                .font(.custom("HelveticaNeue", fixedSize: 30))
-                                .tag(index)
-                            
+//                                Text("\(self.secondsArray[index])")
+                            Text(index > 9 ? "\(self.secondsArray[index])" : "0" + "\(self.secondsArray[index])")
+                                    .fontWeight(.light)
+                                    .foregroundColor(.black)
+                                    .font(.custom("HelveticaNeue", fixedSize: 30))
+                                    .tag(index)
                         }
                     }
-                    
                     .labelsHidden()
                     .onChange(of: self.secondSelection) { newValue in
                         seconds = totalInSeconds
@@ -131,8 +134,6 @@ struct TimePickerForm: View {
             .frame(width: 200, height: 240)
             .background(Color.white)
             .cornerRadius(15)
-//            .clipped()
-            
             CancelButton(action: cancelAction)
                 .offset(x: 100, y: -120)
         } // Zstack
@@ -142,7 +143,7 @@ struct TimePickerForm: View {
 
 struct TimePickerForm_Previews: PreviewProvider {
     static var previews: some View {
-        TimePickerForm(OKAction: {}, cancelAction: {})
+        TimePickerForm(OKAction: {}, cancelAction: {}, secondSelection: 0)
             
             
     }

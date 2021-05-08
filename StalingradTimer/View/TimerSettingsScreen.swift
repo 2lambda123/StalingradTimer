@@ -9,6 +9,10 @@ import SwiftUI
 
 struct TimerSettingsScreen: View {
     
+    @Environment(\.presentationMode) var timerSettingsPresentation
+    
+    @State private var showTimePickerForm = false
+    
     @State private var preparePickerShow = false
     @State private var workPickerShow = false
     @State private var restPickerShow = false
@@ -22,43 +26,39 @@ struct TimerSettingsScreen: View {
     
     var body: some View {
         ZStack {
-                Form {
-                    
-                    Section(header: Text("")){
-                        HStack {
-                            Text("Подготовка")
-                            Spacer()
-                            Button(action: { preparePickerShow = true }) {
-                                Text("00:15")
-                                    .foregroundColor(.black)
-                                    .padding(5)
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(5)
-                            }
-                            //                    TimePickerForm(OKAction: {}, cancelAction: {})
+            Form {
+                
+                Section(header: Text("")){
+                    HStack {
+                        Text("Подготовка")
+                        Spacer()
+                        Button(action: { withAnimation(.default){ showTimePickerForm = true } }) {
+                            Text("00:15")
+                                .foregroundColor(.black)
+                                .padding(5)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(5)
                         }
-                        
-                        
-                    }
-                    Section(header: Text("")){
-                        DatePicker("Тренировка", selection: $currentDate, displayedComponents: .hourAndMinute)
-                        //                        .datePickerStyle(FieldDatePickerStyle())
-                        DatePicker("Отдых", selection: $currentDate, displayedComponents: .hourAndMinute)
-                        
-                    }
-                    Section(header: Text("")){
-                        DatePicker("Раунды", selection: $currentDate, displayedComponents: .hourAndMinute)
-                        DatePicker("Циклы", selection: $currentDate, displayedComponents: .hourAndMinute)
-                        DatePicker("Востановление", selection: $currentDate, displayedComponents: .hourAndMinute)
-                        
                     }
                 }
+            }
             
-        if preparePickerShow {
-                TimePickerForm(OKAction: {preparePickerShow = false}, cancelAction: {preparePickerShow = false})
+        if showTimePickerForm {
+            TimePickerForm(OKAction: { showTimePickerForm = false }, cancelAction: {showTimePickerForm = false}, secondSelection: 0)
             }
         } //ZStack
         .navigationBarTitle(Text("Настройка таймера"), displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action: { timerSettingsPresentation.wrappedValue.dismiss() }) {
+            if showTimePickerForm == false {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Назад")
+                }
+                .foregroundColor(.red)
+                .font(.custom("HelveticaNeue", size: 15))
+            }
+        })
     }
 }
 

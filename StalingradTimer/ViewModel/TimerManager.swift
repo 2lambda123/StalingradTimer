@@ -16,7 +16,7 @@ class TimerManager: ObservableObject {
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
     @Published var usersPrepareTime: Float = 3
-    @Published var usersWorkTime: Float = 3
+    @Published var usersWorkTime: Float = 15
     @Published var usersRestTime: Float = 3
     @Published var usersRounds = 2
     @Published var usersCycles = 2

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsScreen: View {
+   
+    @Environment(\.presentationMode) var settingsPresentation
     
     @State private var showButton = false
     
@@ -106,15 +108,23 @@ struct SettingsScreen: View {
 //                    .navigationBarItems(leading: )
                 } // navigationView
             if showButton {
-//                StartPauseButton(action: {}, buttonText: "TEST")
-//                GeometryReader { _ in
-                    
-                TimePickerForm(OKAction: {print("checkmark")}, cancelAction: {print("xmark button pressed")})
-//
+                
+                TimePickerForm(OKAction: {print("checkmark")}, cancelAction: { withAnimation(.easeInOut(duration: 4)){ showButton = false } }, secondSelection: 0)
             }
         }//ZStack
-        .navigationBarTitle(Text("Настройки"), displayMode: .inline)
-
+        .navigationBarTitle(Text("Настройки") , displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
+            if showButton == false {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Назад")
+                }
+                .foregroundColor(.black)
+                .font(.custom("HelveticaNeue", size: 15))
+            }
+        })
+     
     }
 }
 
