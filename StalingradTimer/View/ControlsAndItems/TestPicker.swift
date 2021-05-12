@@ -23,12 +23,13 @@ struct TestPicker: View {
     
     @State private var daySelection = 0
     @State private var hourSelection = 0
-    @State private var minuteSelection = 1
+    @State  var minuteSelection: Int
     @State private var secondSelection = 0
     
     private let frameHeight: CGFloat = 160
     
     var body: some View {
+        ZStack {
         GeometryReader { geometry in
             HStack(spacing: 0) {
                 Picker(selection: self.$daySelection, label: Text("")) {
@@ -48,10 +49,13 @@ struct TestPicker: View {
                     }
                 }
                 .onChange(of: self.hourSelection) { newValue in
-                    seconds = totalInSeconds
+                     seconds = totalInSeconds
                 }
                 .frame(width: geometry.size.width/4, height: frameHeight, alignment: .center)
                 .clipped()
+                
+                
+                
                 
                 Picker(selection: self.$minuteSelection, label: Text("")) {
                     ForEach(0 ..< self.minutesArray.count) { index in
@@ -61,6 +65,9 @@ struct TestPicker: View {
                 .onChange(of: self.minuteSelection) { newValue in
                     seconds = totalInSeconds
                 }
+                
+                
+                
                 .frame(width: geometry.size.width/4, height: frameHeight, alignment: .center)
                 .clipped()
                 
@@ -69,33 +76,48 @@ struct TestPicker: View {
                         Text("\(self.secondsArray[index]) s").tag(index)
                     }
                 }
-                .onChange(of: self.secondSelection) { newValue in
+                .onChange(of: self.secondSelection) { _ in
                     seconds = totalInSeconds
                 }
                 .frame(width: geometry.size.width/4, height: frameHeight, alignment: .center)
                 .clipped()
             }
         }
-        .onAppear(perform: { updatePickers() })
-        .frame(width: 250, height: 200)
-        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
-        .cornerRadius(40)
+//        .onAppear(perform: { updatePickers() })
+            HStack {
+                Text("\(seconds)")
+                    .font(.largeTitle)
+                Spacer()
+                Button(action: {seconds = totalInSeconds}, label: {
+                    Text("Button")
+                })
+                Spacer()
+                Text("\(secondsToMinutesAndSeconds(seconds: Float(seconds)))")
+                    .font(.largeTitle)
+                
+            }
+            .padding()
+            .padding(.horizontal)
+            Spacer()
+        }
+        
     }
     
-    func updatePickers() {
-//        daySelection = seconds.secondsToDays
-//        hourSelection = seconds.secondsToHours
-//        minuteSelection = seconds.secondsToMinutes
-//        secondSelection = seconds.secondsRemainder
-    }
+//    func updatePickers() {
+//        daySelection = $seconds.secondsToDays
+//        hourSelection = $seconds.secondsToHours
+//        minuteSelection = $seconds.secondsToMinutes
+//        secondSelection = $seconds.secondsRemainder
+//    }
     
     var totalInSeconds: Int {
         return daySelection * self.secondsInDay + hourSelection * self.secondsInHour + minuteSelection *     self.secondsInMinute + secondSelection
     }
     
+    
 }
     struct TestPicker_Previews: PreviewProvider {
         static var previews: some View {
-            TestPicker(seconds: 50)
+            TestPicker(seconds: 0, minuteSelection: 10)
         }
     }

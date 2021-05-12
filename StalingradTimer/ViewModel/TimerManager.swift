@@ -12,14 +12,15 @@ import Combine
 class TimerManager: ObservableObject {
     
     
-    
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    @Published var usersPrepareTime: Float = 3
+    @Published var usersPrepareTime: Float = 62
     @Published var usersWorkTime: Float = 15
     @Published var usersRestTime: Float = 3
     @Published var usersRounds = 2
     @Published var usersCycles = 2
+    
+    @Published var showTimePicker = false
     
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0

@@ -107,20 +107,20 @@ struct SettingsScreen: View {
                 
 //                    .navigationBarItems(leading: )
                 } // navigationView
-            if showButton {
-                
-                TimePickerForm(OKAction: {print("checkmark")}, cancelAction: { withAnimation(.easeInOut(duration: 4)){ showButton = false } }, secondSelection: 0)
-            }
+//            if showButton {
+//                
+//                TimePickerForm(secondSelection: 0)
+//            }
         }//ZStack
         .navigationBarTitle(Text("Настройки") , displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
             if showButton == false {
-                HStack {
+                
                     Image(systemName: "chevron.left")
-                    Text("Назад")
-                }
-                .foregroundColor(.black)
+                        .font(.title3)
+                
+                .foregroundColor(.red)
                 .font(.custom("HelveticaNeue", size: 15))
             }
         })
@@ -130,7 +130,9 @@ struct SettingsScreen: View {
 
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsScreen()
+        NavigationView {
+            SettingsScreen()
+        }
             
             
     }

@@ -44,13 +44,15 @@
  _________________________________________________________________________
  - сделать выбор времени через .sheet
  
+ _________________________________________________________________________
+ - уменьшить иконки
  */
 
 import SwiftUI
 
 struct TimerScreen: View {
     
-    @StateObject private var timerManager = TimerManager()
+    @EnvironmentObject private var timerManager: TimerManager
     
 
     
@@ -94,7 +96,7 @@ struct TimerScreen: View {
                         StalingradLogo()
                             .animation(nil)
                             .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-                            .opacity(bigLogoAnimate ? 1 : 0.1)
+                            .opacity(bigLogoAnimate ? 1 : 0.8)
                             .animation(.default, value: bigLogoAnimate)
                             .onAppear() {
                                 withAnimation(.default) {
@@ -161,6 +163,7 @@ struct TimerScreen: View {
 struct TimerScreen_Previews: PreviewProvider {
     static var previews: some View {
             TimerScreen()
+                .environmentObject(TimerManager())
     }
 }
 
