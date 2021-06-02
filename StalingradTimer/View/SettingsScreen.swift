@@ -119,8 +119,7 @@ struct SettingsScreen: View {
                 
                     Image(systemName: "chevron.left")
                         .font(.title3)
-                
-                .foregroundColor(.red)
+                        .foregroundColor(.black)
                 .font(.custom("HelveticaNeue", size: 15))
             }
         })

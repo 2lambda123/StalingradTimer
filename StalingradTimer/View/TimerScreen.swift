@@ -167,6 +167,12 @@ struct TimerScreen_Previews: PreviewProvider {
     }
 }
 
+
+
+
+
+
+
 struct StalingradLogo: View {
     @ObservedObject var timerManager = TimerManager()
 //    @Binding var bigLogoAnimate: Bool
@@ -257,12 +263,12 @@ struct SettingsButton: View {
     @ObservedObject var timerManager: TimerManager
     var body: some View {
         NavigationLink(destination: SettingsScreen()) {
-            Image(systemName: "gearshape")
-                .font(.system(size: 35, weight: .light))
-                .foregroundColor(.black)
-                .animation(nil)
-                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                .animation(.default)
+                Image(systemName: "gearshape")
+                    .font(.system(size: 35, weight: .light))
+                    .foregroundColor(.black)
+                    .animation(nil)
+                    .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+                    .animation(.default)
         }
     }
 }

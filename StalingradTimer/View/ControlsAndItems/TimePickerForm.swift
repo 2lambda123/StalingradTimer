@@ -23,7 +23,7 @@ struct TimePickerForm: View {
 //        var OKAction: () -> Void
 //    var cancelAction: () -> Void
     
-    @State var seconds: Int
+    @State var seconds: Float
     
     var daysArray = [Int](0..<30)
     var hoursArray = [Int](0..<23)
@@ -40,6 +40,7 @@ struct TimePickerForm: View {
     @State var minuteSelection: Int
     @State var secondSelection: Int
     
+    @State var timePickerText: String
     
     
     private let frameHeight: CGFloat = 160
@@ -67,7 +68,7 @@ struct TimePickerForm: View {
             
             //MARK: - Time Picker
             VStack {
-                Text("Подготовка")
+                Text("\(timePickerText)")
                     .italic()
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -89,8 +90,7 @@ struct TimePickerForm: View {
                     }
                     .labelsHidden()
                     .onChange(of: minuteSelection) { newValue in
-                        seconds = totalInSeconds
-                        print(minuteSelection)
+                        seconds = Float(totalInSeconds)
                     }
                     .frame(width: 80, height: 110)
                     .clipped()
@@ -109,7 +109,7 @@ struct TimePickerForm: View {
                     }
                     .labelsHidden()
                     .onChange(of: secondSelection) { newValue in
-                        seconds = totalInSeconds
+                        seconds = Float(totalInSeconds)
                     }
                     .frame(width: 80, height: 110)
                     .clipped()
@@ -118,7 +118,8 @@ struct TimePickerForm: View {
                 Divider()
                     .foregroundColor(.red)
                 // если разобрать, как заменить timerManager.usersPrepareTime = Float(totalInSeconds), на Binding  = Float(totalInSeconds), то можно будет применить данную форму ко всем вариантам (подг, трен, отдых и т.д.)
-                Button(action: { timerManager.usersPrepareTime = Float(totalInSeconds); timerManager.showTimePicker = false; print("rprepare time is: \(timerManager.usersPrepareTime)") }) {
+//                timerManager.usersPrepareTime = Float(totalInSeconds)
+                Button(action: { getSeconds(); timerManager.showTimePicker = false; print("\(timerManager.settingsMode) time is: \(seconds) sec") }) {
                     Text("OK")
                         .italic()
                         .fontWeight(.bold)
@@ -141,17 +142,18 @@ struct TimePickerForm: View {
                 .offset(x: 100, y: -120)
                 .offset(y: -44)
             
-            HStack {
-                Button(action: {seconds = totalInSeconds}, label: {
-                    Text("Button")
-                    Spacer().frame(width: 30)
-                 Text("\(seconds)")
-                })
-            }
-            .font(.largeTitle)
-            .foregroundColor(.white)
-            .offset(y: 130)
-            .padding(.horizontal)
+            // test stack
+//            HStack {
+//                Button(action: {seconds = totalInSeconds}, label: {
+//                    Text("Button")
+//                    Spacer().frame(width: 30)
+//                 Text("\(seconds)")
+//                })
+//            }
+//            .font(.largeTitle)
+//            .foregroundColor(.white)
+//            .offset(y: 130)
+//            .padding(.horizontal)
             
             
         } // Zstack
@@ -162,7 +164,7 @@ struct TimePickerForm: View {
 struct TimePickerForm_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TimePickerForm(seconds: 1, minuteSelection: 5, secondSelection: 10)
+            TimePickerForm(seconds: 1, minuteSelection: 5, secondSelection: 10, timePickerText: "Подготовка")
                 .environmentObject(TimerManager())
         } .navigationBarTitleDisplayMode(.inline)
         
@@ -182,6 +184,23 @@ struct CancelButton: View {
                 .frame(width: 35, height: 35)
                 
             
+        }
+    }
+}
+
+
+extension TimePickerForm {
+   private func getSeconds()  {
+        switch timerManager.settingsMode {
+        case .prepare:
+            timerManager.usersPrepareTime = Float(totalInSeconds)
+        case .work:
+            timerManager.usersWorkTime = Float(totalInSeconds)
+        case .rest:
+            timerManager.usersRestTime = Float(totalInSeconds)
+        case .cycleRest:
+            timerManager.usersCyclesRest = Float(totalInSeconds)
+        default: break
         }
     }
 }

@@ -14,11 +14,12 @@ class TimerManager: ObservableObject {
     
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    @Published var usersPrepareTime: Float = 62
-    @Published var usersWorkTime: Float = 15
+    @Published var usersPrepareTime: Float = 5
+    @Published var usersWorkTime: Float = 10
     @Published var usersRestTime: Float = 3
     @Published var usersRounds = 2
     @Published var usersCycles = 2
+    @Published var usersCyclesRest: Float = 20
     
     @Published var showTimePicker = false
     
@@ -26,6 +27,8 @@ class TimerManager: ObservableObject {
     @Published var totalTime: Float = 0
     
     @Published var trainMode: TrainMode = .initial
+    
+    @Published var settingsMode: SettingsMode = .prepare
     
     
     @Published var startButtonOn = true
