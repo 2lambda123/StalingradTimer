@@ -13,6 +13,7 @@
 		0425309225FAB48F0061C318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309125FAB48F0061C318 /* Assets.xcassets */; };
 		0425309525FAB48F0061C318 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425309425FAB48F0061C318 /* Preview Assets.xcassets */; };
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
+		042AAE782667C283009718C6 /* ValuePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AAE772667C283009718C6 /* ValuePickerForm.swift */; };
 		0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */; };
 		0490AF14263B3CCF004ED3A4 /* TimePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */; };
 		0490AF18263B44BE004ED3A4 /* TestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF17263B44BE004ED3A4 /* TestPicker.swift */; };
@@ -37,6 +38,7 @@
 		0425309425FAB48F0061C318 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0425309625FAB48F0061C318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
+		042AAE772667C283009718C6 /* ValuePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerForm.swift; sourceTree = "<group>"; };
 		0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsScreen.swift; sourceTree = "<group>"; };
 		0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerForm.swift; sourceTree = "<group>"; };
 		0490AF17263B44BE004ED3A4 /* TestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPicker.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */,
+				042AAE772667C283009718C6 /* ValuePickerForm.swift */,
 				0490AF17263B44BE004ED3A4 /* TestPicker.swift */,
 				04A9EED825FCFF0F00254588 /* TimerValueText.swift */,
 				04ED25AD260F5B4B00FAD03D /* CircleProgressBar.swift */,
@@ -240,6 +243,7 @@
 				0417ECB32603EF39009D5F10 /* TestUIPage.swift in Sources */,
 				04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */,
 				04A9EEC725FCEBD400254588 /* ShadowForViews.swift in Sources */,
+				042AAE782667C283009718C6 /* ValuePickerForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -96,10 +96,10 @@ struct TimerScreen: View {
                         StalingradLogo()
                             .animation(nil)
                             .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-                            .opacity(bigLogoAnimate ? 1 : 0.8)
-                            .animation(.default, value: bigLogoAnimate)
+//                            .opacity(bigLogoAnimate ? 1 : 0.8)
+                            .animation(.easeOut(duration: 0.5), value: bigLogoAnimate)
                             .onAppear() {
-                                withAnimation(.default) {
+                                withAnimation(.easeOut(duration: 0.5)) {
                                     bigLogoAnimate = true
                                 }
                             }
@@ -142,10 +142,10 @@ struct TimerScreen: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); withAnimation(.default) { bigLogoAnimate = true } })
+                    ResetButton(action:  { timerManager.resetTimer() })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
-                        .animation(.default)
+                        .animation(.easeOut(duration: 0.5))
 //                        .animation(.easeInOut(duration: 0))
                     Spacer()
                 }
@@ -223,7 +223,7 @@ struct RoundsTotaltimeCycles: View {
                         .font(.custom("HelveticaNeue-Thin", size: 38))
                         //                            .fontWeight(.regular)
                         +
-                        Text(timerManager.usersCycles == 0 ? "" : "/\(timerManager.usersCycles)")
+                        Text(timerManager.usersCycles == 1 ? "" : "/\(timerManager.usersCycles)")
                         
                         .font(.custom("HelveticaNeue-Thin", size: 28))
                         .fontWeight(.ultraLight)
@@ -246,7 +246,7 @@ struct RoundsTotaltimeCycles: View {
                     .font(.custom("HelveticaNeue-Thin", size: 16))
                     .fontWeight(.ultraLight)
                     .frame(maxWidth: .infinity)
-                Text(timerManager.usersCycles == 0 ? "" : "ЦИКЛЫ")
+                Text(timerManager.usersCycles == 1 ? "" : "ЦИКЛЫ")
                     .italic()
                     .font(.custom("HelveticaNeue-Thin", size: 16))
                     .fontWeight(.ultraLight)
@@ -268,7 +268,7 @@ struct SettingsButton: View {
                     .foregroundColor(.black)
                     .animation(nil)
                     .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                    .animation(.default)
+                    .animation(.easeOut(duration: 0.5))
         }
     }
 }

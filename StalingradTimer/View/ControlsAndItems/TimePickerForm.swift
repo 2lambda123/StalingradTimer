@@ -13,7 +13,7 @@ struct TimePickerForm: View {
     
     
      var totalInSeconds: Int {
-        return minuteSelection * self.secondsInMinute + secondSelection
+        return minuteSelection * secondsInMinute + secondSelection
     }
     
     @EnvironmentObject private var timerManager: TimerManager
@@ -70,19 +70,18 @@ struct TimePickerForm: View {
             VStack {
                 Text("\(timePickerText)")
                     .italic()
-                    .fontWeight(.bold)
+//                    .fontWeight(.bold)
                     .foregroundColor(.black)
                     .font(.custom("HelveticaNeue", fixedSize: 20))
                 
                 Divider()
                 // minets
-                //TODO: - убрать значение у minuteSelection
                 HStack(spacing: 2) {
                     
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
                             Text(index > 9 ? "\(self.minutesArray[index])" : "0" + "\(self.minutesArray[index])")
-                                .fontWeight(.light)
+//                                .fontWeight(.bold)
                                 .foregroundColor(.black)
                                 .font(.custom("HelveticaNeue", fixedSize: 30))
                                 .tag(index)
@@ -101,7 +100,7 @@ struct TimePickerForm: View {
                         ForEach(0 ..< secondsArray.count) { index in
                             //                                Text("\(self.secondsArray[index])")
                             Text(index > 9 ? "\(self.secondsArray[index])" : "0" + "\(self.secondsArray[index])")
-                                .fontWeight(.light)
+//                                .fontWeight(.light)
                                 .foregroundColor(.black)
                                 .font(.custom("HelveticaNeue", fixedSize: 30))
                                 .tag(index)
@@ -116,19 +115,17 @@ struct TimePickerForm: View {
                 }
                 
                 Divider()
-                    .foregroundColor(.red)
-                // если разобрать, как заменить timerManager.usersPrepareTime = Float(totalInSeconds), на Binding  = Float(totalInSeconds), то можно будет применить данную форму ко всем вариантам (подг, трен, отдых и т.д.)
-//                timerManager.usersPrepareTime = Float(totalInSeconds)
-                Button(action: { getSeconds(); timerManager.showTimePicker = false; print("\(timerManager.settingsMode) time is: \(seconds) sec") }) {
+                Button(action: { getSeconds();   timerManager.showTimePicker = false ; print("\(timerManager.settingsMode) time is: \(seconds) sec") }) {
                     Text("OK")
                         .italic()
-                        .fontWeight(.bold)
+//                        .fontWeight(.bold)
                         .foregroundColor(.red)
                         .font(.custom("HelveticaNeue", fixedSize: 20))
                         
                         .frame(width: 170, height: 30)
                 }
                 .offset(x: 0, y: 5)
+                .disabled(secondSelection + minuteSelection == 0 && timerManager.settingsMode == .work)
                 
                 
             }// Vstack
@@ -138,7 +135,7 @@ struct TimePickerForm: View {
             .offset(y: -44)
             
             //MARK: - Cancel button
-            CancelButton(action: {withAnimation(.easeInOut(duration: 4)){ timerManager.showTimePicker = false } })
+            CancelButton(action: { timerManager.showTimePicker = false ; print("showTimePicker is: \(timerManager.showTimePicker)") })
                 .offset(x: 100, y: -120)
                 .offset(y: -44)
             
