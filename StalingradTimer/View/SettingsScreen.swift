@@ -11,7 +11,7 @@ struct SettingsScreen: View {
    
     @Environment(\.presentationMode) var settingsPresentation
     
-    @State private var showButton = false
+//    @State private var showButton = false
     
     @State private var alertShown = false
     
@@ -60,10 +60,11 @@ struct SettingsScreen: View {
                     
                     Section(header: Text("")) {
                         FormRawSettingsView(icon: "sun.min.fill", firstText: "Дистплей", iconBG: Color.yellow)
-                    }
-                    Section(header: Text("")) {
                         FormRawSettingsView(icon: "speaker.wave.2.fill", firstText: "Звук", iconBG: Color.green)
                     }
+//                    Section(header: Text("")) {
+//                        FormRawSettingsView(icon: "speaker.wave.2.fill", firstText: "Звук", iconBG: Color.green)
+//                    }
                     Section(header: Text("")) {
                         FormRawSettingsView(icon: "stopwatch.fill", firstText: "Таймер", iconBG: Color.red)
                     }
@@ -94,12 +95,10 @@ struct SettingsScreen: View {
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
-//            if showButton == false {
-//                    Image(systemName: "chevron.left")
-//                        .font(.title3)
-//                        .foregroundColor(.black)
-//                .font(.custom("HelveticaNeue", size: 15))
-//            }
+                    Image(systemName: "chevron.left")
+                        .font(.title3)
+                        .foregroundColor(.black)
+                .font(.custom("HelveticaNeue", size: 15))
         })
      
     }
