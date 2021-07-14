@@ -31,8 +31,9 @@ struct SettingsScreen: View {
     //         }
     
     var body: some View {
-        ZStack {
+        VStack {
                 Form {
+                    //MARK: - Section 1
                     Section(header: Text("")){
                         HStack {
                             Image("logoSettingsSmall")
@@ -51,77 +52,54 @@ struct SettingsScreen: View {
                                 Text("1.0.0")
                                     .font(.custom("HelveticaNeue", fixedSize: 15))
                                     .modifier(ShadowForViews())
-                                    .foregroundColor(Color.black)
-                                    .opacity(0.7)
+                                    .foregroundColor(Color.secondary)
                             }
                         }
                         .frame(height: 80)
-                    }
+                    } //: Section 1
                     
-                    Section(header: Text("Основные"), footer: Text("asdsadasdadasd")){
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Image(systemName: "sun.min.fill")
-                                Text("Тема приложения")
-                            }
-                            Picker("Тема приложения", selection: $themeSelection) {
-                                Text("Light").tag(0)
-                                Text("Dark").tag(1)
-                                Text("Automatic").tag(2)
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                        }
-                        
+                    Section(header: Text("")) {
+                        FormRawSettingsView(icon: "sun.min.fill", firstText: "Дистплей", iconBG: Color.yellow)
                     }
+                    Section(header: Text("")) {
+                        FormRawSettingsView(icon: "speaker.wave.2.fill", firstText: "Звук", iconBG: Color.green)
+                    }
+                    Section(header: Text("")) {
+                        FormRawSettingsView(icon: "stopwatch.fill", firstText: "Таймер", iconBG: Color.red)
+                    }
+                    Section(header: Text("")) {
+                        FormRawSettingsView(icon: "crown.fill", firstText: "Клуб Сталинград", iconBG: Color.red)
+                        FormRawSettingsView(icon: "link.circle.fill", firstText: "Контакты", iconBG: Color.blue)
+                        FormRawSettingsView(icon: "arrowshape.turn.up.forward.fill", firstText: "Поделиться", iconBG: Color.blue)
+                    }
+                    Section(header: Text("")) {
+                        FormRawSettingsView(icon: "info.circle.fill", firstText: "О приложении", iconBG: Color.black)
+                    }
+//                    .textCase(nil)
                     
-                    Section(header: Text("Таймер")){
-                        VStack {
-                            Toggle(isOn: $stepEnable ) {
-                                Text("Добавить время")
-                            }
-                        }
-                    }
-
-                    Section(header: Text("Таймер")){
-                        VStack {
-                            HStack{
-                                Text("Добавить время")
-                                Spacer()
-                                Button(action: { showButton = true}) {
-                                    Text("00:15")
-                                        .foregroundColor(.black)
-                                        .padding(5)
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(5)
-                                }
-                            }
-                        }
-                    }
-//                        Picker("Выберите шаг", selection: $stepSelected) {
-//                            ForEach(0..<steps.count) {
-//                                Text("\(steps[$0]) сек")
-//                            }
-//                        }
-//                        .pickerStyle(InlinePickerStyle())
-                     // Form
-                
-//                    .navigationBarItems(leading: )
-                } // navigationView
-//            if showButton {
-//                
-//                TimePickerForm(secondSelection: 0)
-//            }
-        }//ZStack
+                } // Form
+//
+            // MARK: - Footer
+            Text("Copyright © All rights reserved.")
+                .multilineTextAlignment(.center)
+                .font(.footnote)
+                .padding(.top)
+                .padding(.bottom)
+                .padding(.bottom)
+                .foregroundColor(Color.secondary)
+        }//VStack
+        
         .navigationBarTitle(Text("Настройки") , displayMode: .inline)
+        .background(Color("menuBG"))
+        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
-            if showButton == false {
-                
-                    Image(systemName: "chevron.left")
-                        .font(.title3)
-                        .foregroundColor(.black)
-                .font(.custom("HelveticaNeue", size: 15))
-            }
+//            if showButton == false {
+//                    Image(systemName: "chevron.left")
+//                        .font(.title3)
+//                        .foregroundColor(.black)
+//                .font(.custom("HelveticaNeue", size: 15))
+//            }
         })
      
     }
