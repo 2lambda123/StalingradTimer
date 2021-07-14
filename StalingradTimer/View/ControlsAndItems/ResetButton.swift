@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ResetButton: View {
+    @ObservedObject var timerManager = TimerManager()
     var action: () -> Void
-    var buttonColor: Color
-    var imageName: String
+    var buttonColor = Color.red
+    var imageName = "gobackward"
     var body: some View {
         
         Button(action: action) {
@@ -29,7 +30,12 @@ struct ResetButton: View {
                     .foregroundColor(buttonColor)
                     .padding()
             }
+//            .animation(nil)
+            
         }
+        .animation(nil)
+        .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+        .animation(.default)
     }
 }
 

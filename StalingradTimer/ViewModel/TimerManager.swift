@@ -11,18 +11,26 @@ import Combine
 
 class TimerManager: ObservableObject {
     
+    
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    @Published var usersPrepareTime: Float = 3
-    @Published var usersWorkTime: Float = 3
+    @Published var usersPrepareTime: Float = 5
+    @Published var usersWorkTime: Float = 10
     @Published var usersRestTime: Float = 3
     @Published var usersRounds = 2
     @Published var usersCycles = 2
+    @Published var usersCyclesRest: Float = 20
+    
+    @Published var showTimePicker = false
+    @Published var showValuePicker = false
     
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
     
     @Published var trainMode: TrainMode = .initial
+    
+    @Published var settingsMode: SettingsMode = .prepare
+    
     
     @Published var startButtonOn = true
     
@@ -76,17 +84,17 @@ class TimerManager: ObservableObject {
     
     @objc func updateTimerValue() {
 //        print(#function)
-       
-        
         totalTime -= 1
         
         currentTime -= 1
+        
         //prepare
         if currentTime < 0 && trainMode == .prepare {
             totalTime += 1
             trainMode = .work
             currentTime = workTime
         }
+        
         //work
         if currentTime < 0 && trainMode == .work {
             
