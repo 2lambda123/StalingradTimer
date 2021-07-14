@@ -98,7 +98,7 @@ struct ValuePickerForm: View {
             .offset(y: -44)
             
             //MARK: - Cancel button
-            CancelButtonValuePicker(action: {withAnimation(.easeInOut(duration: 4)){ timerManager.showValuePicker = false }; setValueIfCancelButtonPwressed()  })
+            CancelButtonValuePicker(action: { withAnimation(.easeInOut(duration: 4)){ timerManager.showValuePicker = false }; setValueIfCancelButtonPwressed() })
                 .offset(x: 100, y: -90)
                 .offset(y: -44)
             

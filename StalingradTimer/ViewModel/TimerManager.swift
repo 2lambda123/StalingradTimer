@@ -84,17 +84,17 @@ class TimerManager: ObservableObject {
     
     @objc func updateTimerValue() {
 //        print(#function)
-       
-        
         totalTime -= 1
         
         currentTime -= 1
+        
         //prepare
         if currentTime < 0 && trainMode == .prepare {
             totalTime += 1
             trainMode = .work
             currentTime = workTime
         }
+        
         //work
         if currentTime < 0 && trainMode == .work {
             
