@@ -34,7 +34,7 @@ struct ResetButton: View {
             
         }
         .animation(nil)
-        .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
+//        .opacity(timerManager.trainMode == .initial ? 0.5 : 1)
         .animation(.default)
     }
 }

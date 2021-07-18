@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ValuePickerForm: View {
     
-//    @Environment(\.presentationMode) var valuePickerPresentation
+    @Environment(\.presentationMode) var valuePickerPresentation
     
     @EnvironmentObject private var timerManager: TimerManager
 

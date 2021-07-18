@@ -54,9 +54,10 @@ struct TimerScreen: View {
     
     @EnvironmentObject private var timerManager: TimerManager
     
-
+    
     
     private let bigLogo = "StalingradLogo"
+    
     @State private var bigLogoAnimate = true
     @State private var totalOpacityAn: Double = 0
     
@@ -154,6 +155,8 @@ struct TimerScreen: View {
         .padding()
         .navigationBarHidden(true)
         }
+        .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
+        .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
          // NavigationView
         
         
@@ -262,13 +265,16 @@ struct RoundsTotaltimeCycles: View {
 struct SettingsButton: View {
     @ObservedObject var timerManager: TimerManager
     var body: some View {
-        NavigationLink(destination: SettingsScreen()) {
+        Button(action: { timerManager.showSettingsScreen.toggle() }) {
                 Image(systemName: "gearshape")
                     .font(.system(size: 35, weight: .light))
                     .foregroundColor(.black)
                     .animation(nil)
                     .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
                     .animation(.easeOut(duration: 0.5))
+        }
+        .sheet(isPresented: $timerManager.showSettingsScreen) {
+            SettingsScreen()
         }
     }
 }

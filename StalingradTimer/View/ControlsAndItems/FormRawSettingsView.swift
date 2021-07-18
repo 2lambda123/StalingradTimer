@@ -27,7 +27,8 @@ struct FormRawSettingsView: View {
             .frame(width: 35, height: 35)
             .padding(.trailing, 5)
             Text(firstText)
-                .foregroundColor(.gray)
+                .font(.custom("HelveticaNeue", size: 17))
+                
             Spacer()
             Image(systemName: "chevron.right")
                 .foregroundColor(.secondary)

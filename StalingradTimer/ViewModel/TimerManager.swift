@@ -24,6 +24,8 @@ class TimerManager: ObservableObject {
     @Published var showTimePicker = false
     @Published var showValuePicker = false
     
+    @Published var showSettingsScreen = false
+    
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
     

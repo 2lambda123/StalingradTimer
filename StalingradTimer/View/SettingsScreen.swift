@@ -21,17 +21,31 @@ struct SettingsScreen: View {
     @State private var stepEnable = false
     
     @State private var themeSelection = 0
-    //    init() {
-    //
-    //              UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-    //              UINavigationBar.appearance().shadowImage = UIImage()
-    //              UINavigationBar.appearance().isTranslucent = true
-    //              UINavigationBar.appearance().tintColor = .clear
-    //              UINavigationBar.appearance().backgroundColor = .clear
-    //         }
-    
+ 
     var body: some View {
+        
         VStack {
+            
+            ZStack {
+                Text("Настройки")
+//                    .font(.custom("HelveticaNeue", size: 20))
+//                    .bold()
+                    .font(.headline)
+                HStack {
+                    Spacer()
+                    Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.black)
+                            .font(.headline)
+                    }
+                }
+            }
+            .font(.custom("HelveticaNeue", fixedSize: 20))
+            .padding()
+//            .padding(.bottom, 5)
+//            .background(Color("menuBG"))
+            .background(Color.white)
+            
                 Form {
                     //MARK: - Section 1
                     Section(header: Text("")){
@@ -79,6 +93,7 @@ struct SettingsScreen: View {
 //                    .textCase(nil)
                     
                 } // Form
+                .padding(.top, -10)
 //
             // MARK: - Footer
             Text("Copyright © All rights reserved.")
@@ -90,16 +105,16 @@ struct SettingsScreen: View {
                 .foregroundColor(Color.secondary)
         }//VStack
         
-        .navigationBarTitle(Text("Настройки") , displayMode: .inline)
+//        .navigationBarTitle(Text("Настройки") , displayMode: .inline)
         .background(Color("menuBG"))
         .edgesIgnoringSafeArea(.all)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .font(.title3)
-                        .foregroundColor(.black)
-                .font(.custom("HelveticaNeue", size: 15))
-        })
+//        .navigationBarBackButtonHidden(true)
+//        .navigationBarItems(leading: Button(action: { settingsPresentation.wrappedValue.dismiss() }) {
+//                    Image(systemName: "xmark")
+//                        .font(.title3)
+//                        .foregroundColor(.black)
+//                .font(.custom("HelveticaNeue", size: 15))
+//        })
      
     }
 }
