@@ -29,7 +29,7 @@ class TimerManager: ObservableObject {
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
     
-    @Published var trainMode: TrainMode = .initial
+    @Published var trainMode: TrainMode = .work
     
     @Published var settingsMode: SettingsMode = .prepare
     

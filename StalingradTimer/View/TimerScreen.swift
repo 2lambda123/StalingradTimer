@@ -54,12 +54,12 @@ struct TimerScreen: View {
     
     @EnvironmentObject private var timerManager: TimerManager
     
-    
-    
     private let bigLogo = "StalingradLogo"
     
     @State private var bigLogoAnimate = true
     @State private var totalOpacityAn: Double = 0
+    
+    @State private var showAddingTimeMenu = false
     
     var body: some View {
         
@@ -84,11 +84,33 @@ struct TimerScreen: View {
                     CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
                     
                     if timerManager.trainMode != .initial {
-                        TimerValueText( timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
-                                        trainMode: timerManager.getTrainModeName()
+                        TimerValueText(timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
+                                       trainMode: timerManager.getTrainModeName()
                         )
                         .onTapGesture {
-                            timerManager.addTime()
+                            if timerManager.trainMode == .work {
+                                showAddingTimeMenu.toggle()
+                            }
+                        }
+                        // уменьшить радиус действия TimerValueText
+                        if showAddingTimeMenu {
+                            HStack {
+                                Button(action: {}){
+                                    Image(systemName: "minus")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.black)
+                                }
+                                Text("5 сек.")
+                                    .font(.custom("HelveticaNeue", size: 15))
+                                    .padding(.horizontal)
+                                
+                                Button(action: { timerManager.addTime()} ) {
+                                    Image(systemName: "plus")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            .offset(x: 0, y: ((UIScreen.main.bounds.width) / 4))
                         }
                     }
                     // MARK: - Stalingrad Logo
