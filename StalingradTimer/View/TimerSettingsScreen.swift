@@ -126,22 +126,24 @@ struct TimerSettingsScreen: View {
             .font(.custom("HelveticaNeue", fixedSize: 18))
             if timerManager.showTimePicker && timerManager.settingsMode == .prepare {
                 TimePickerForm(seconds: timerManager.usersPrepareTime, minuteSelection: (Int(timerManager.usersPrepareTime) % 3600) / 60 , secondSelection: (Int(timerManager.usersPrepareTime) % 3600) % 60, timePickerText: "Подготовка" )
-//                    .animation(.default)
-            
             }
+            
             if timerManager.showTimePicker && timerManager.settingsMode == .work {
                 TimePickerForm(seconds: timerManager.usersWorkTime, minuteSelection: (Int(timerManager.usersWorkTime) % 3600) / 60 , secondSelection: (Int(timerManager.usersWorkTime) % 3600) % 60, timePickerText: "Тренеровка" )
-
             }
+            
             if timerManager.showTimePicker && timerManager.settingsMode == .rest {
                 TimePickerForm(seconds: timerManager.usersRestTime, minuteSelection: (Int(timerManager.usersRestTime) % 3600) / 60 , secondSelection: (Int(timerManager.usersRestTime) % 3600) % 60, timePickerText: "Отдых" )
             }
+            
             if timerManager.showValuePicker && timerManager.settingsMode == .rounds {
                 ValuePickerForm(valuePickerText: "Раунды", valuePickerValue: timerManager.usersRounds)
             }
+            
             if timerManager.showValuePicker && timerManager.settingsMode == .cycles {
                 ValuePickerForm(valuePickerText: "Циклы", valuePickerValue: timerManager.usersCycles)
             }
+            
             if timerManager.showTimePicker && timerManager.settingsMode == .cycleRest {
                 TimePickerForm(seconds: timerManager.usersCyclesRest, minuteSelection: (Int(timerManager.usersCyclesRest) % 3600) / 60 , secondSelection: (Int(timerManager.usersCyclesRest) % 3600) % 60, timePickerText: "Восстановление" )
             }
@@ -171,5 +173,4 @@ struct TimerSettingsScreen_Previews: PreviewProvider {
         
     }
 }
-//Float(secondSelection + (minuteSelection * 60))
 

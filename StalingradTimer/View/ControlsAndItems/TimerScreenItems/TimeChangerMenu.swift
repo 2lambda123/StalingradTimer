@@ -19,8 +19,8 @@ struct TimeChangerMenu: View {
                     .foregroundColor(.black)
                     .frame(width: 40, height: 60)
             }
-            Button(action: {}) {
-                Text("59 сек.")
+            Button(action: { timerManager.showTimeChangePicker.toggle() }) {
+                Text("\(Int(timerManager.timeChangeMenuStep)) сек.")
                     .font(.custom("HelveticaNeue-Thin", size: 35))
                     .foregroundColor(.black)
                     .padding(.horizontal)

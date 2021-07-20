@@ -59,8 +59,9 @@ struct TimerScreen: View {
 //    @State private var showAddingTimeMenu = false
     
     var body: some View {
-        
+        ZStack {
         NavigationView {
+            
         ZStack {
             VStack {
                 //MARK: - "NavigationBar"
@@ -86,14 +87,15 @@ struct TimerScreen: View {
                         )
                         .onTapGesture {
                             if timerManager.trainMode == .work {
-                                timerManager.showAddingTimeMenu.toggle()
+                                timerManager.showTimeChangerMenu.toggle()
                             }
                             
                         }
                         // MARK: - TimeChangerMenu
-                        if timerManager.showAddingTimeMenu && timerManager.trainMode == .work {
+                        if timerManager.showTimeChangerMenu && timerManager.trainMode == .work {
                             TimeChangerMenu()
                         }
+                       
                     }
                     // MARK: - Stalingrad Logo
                     
@@ -147,7 +149,7 @@ struct TimerScreen: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showAddingTimeMenu = false })
+                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showTimeChangerMenu = false })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.easeOut(duration: 0.5))
@@ -155,10 +157,20 @@ struct TimerScreen: View {
                     Spacer()
                 }
             }
-        } //Main ZStack
+//            if timerManager.showTimeChangePicker {
+//                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
+//                    .edgesIgnoringSafeArea(.all)
+//            }
+        } // ZStack
         .padding()
         .navigationBarHidden(true)
-        }
+        } // NavigationView
+            if timerManager.showTimeChangePicker {
+                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }// main ZStack
+        
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
          // NavigationView

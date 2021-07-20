@@ -26,7 +26,9 @@ class TimerManager: ObservableObject {
     
     @Published var showSettingsScreen = false
     
-    @Published var showAddingTimeMenu = false
+    @Published var showTimeChangerMenu = false
+    @Published var showTimeChangePicker = false
+    @Published var timeChangeMenuStep: Float = 1
     
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
@@ -165,15 +167,26 @@ class TimerManager: ObservableObject {
   //MARK: - addTime
     func addTime() {
         if trainMode == .work && currentTime < workTime {
-          currentTime += 1
-            totalTime += 1
+            if timeChangeMenuStep + currentTime > workTime {
+                totalTime += (workTime - currentTime)
+                currentTime = workTime
+            } else {
+                currentTime += timeChangeMenuStep
+                totalTime += timeChangeMenuStep
+                
+            }
         }
     }
     //MARK: - subtractTime
     func subtractTime() {
-        if trainMode == .work && currentTime < workTime && currentTime > 0 {
-          currentTime -= 1
-            totalTime -= 1
+        if trainMode == .work && currentTime <= workTime && currentTime > 0 {
+            if currentTime - timeChangeMenuStep < 0 {
+                totalTime -= currentTime
+                currentTime = 0
+            } else {
+          currentTime -= timeChangeMenuStep
+            totalTime -= timeChangeMenuStep
+            }
         }
     }
     
