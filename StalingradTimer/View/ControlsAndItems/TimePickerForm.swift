@@ -18,15 +18,8 @@ struct TimePickerForm: View {
     
     @EnvironmentObject private var timerManager: TimerManager
     
-   
-    
-//        var OKAction: () -> Void
-//    var cancelAction: () -> Void
-    
     @State var seconds: Float
     
-    var daysArray = [Int](0..<30)
-    var hoursArray = [Int](0..<23)
     var minutesArray = [Int](0...59)
     var secondsArray = [Int](0...59)
     
@@ -44,13 +37,7 @@ struct TimePickerForm: View {
     
     
     private let frameHeight: CGFloat = 160
-    
-    @State var showSome = false
-    
-    
-    
-    @State private var steps = Array(arrayLiteral: 1,3,5,10,15,20,30)
-    @State private var stepSelected = 0
+
     
     private let bgGradient = LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.2549019608, green: 0.2549019608, blue: 0.2549019608, alpha: 1)), Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))]), startPoint: .bottom, endPoint: .top)
     
@@ -62,9 +49,7 @@ struct TimePickerForm: View {
                 .fill(bgGradient)
                 .opacity(0.93)
                 .ignoresSafeArea(edges: .all)
-                .onTapGesture {
-                    showSome = false
-                }
+               
             
             //MARK: - Time Picker
             VStack {
@@ -116,15 +101,7 @@ struct TimePickerForm: View {
                 }
                 
                 Divider()
-                Button(action: {
-                        if timerManager.showTimeChangerMenu {
-                            timerManager.timeChangeMenuStep = Float(secondSelection)
-                            timerManager.showTimeChangePicker = false
-                            print("step is: \(timerManager.timeChangeMenuStep)")
-                        } else {
-                            getSeconds();   timerManager.showTimePicker = false ; print("\(timerManager.settingsMode) time is: \(seconds) sec") 
-                        }
-                       }) {
+                Button(action: {getTimeFromPicker()}) {
                     Text("OK")
                         .italic()
 //                        .fontWeight(.bold)
@@ -144,23 +121,9 @@ struct TimePickerForm: View {
             .offset(y: -44)
             
             //MARK: - Cancel button
-            CancelButton(action: { timerManager.showTimePicker = false ; print("showTimePicker is: \(timerManager.showTimePicker)") })
+            CancelButton(action: { closeTimePickerForm() })
                 .offset(x: 100, y: -120)
                 .offset(y: -44)
-            
-            // test stack
-//            HStack {
-//                Button(action: {seconds = totalInSeconds}, label: {
-//                    Text("Button")
-//                    Spacer().frame(width: 30)
-//                 Text("\(seconds)")
-//                })
-//            }
-//            .font(.largeTitle)
-//            .foregroundColor(.white)
-//            .offset(y: 130)
-//            .padding(.horizontal)
-            
             
         } // Zstack
     }
@@ -207,6 +170,29 @@ extension TimePickerForm {
         case .cycleRest:
             timerManager.usersCyclesRest = Float(totalInSeconds)
         default: break
+        }
+    timerManager.showTimePicker = false
+    print("\(timerManager.settingsMode) time is: \(seconds) sec")
+    }
+    
+    private func getTimeFromPicker() {
+        if timerManager.showTimeChangerMenu {
+            timerManager.timeChangeMenuStep = Float(secondSelection)
+            timerManager.showTimeChangePicker = false
+            print("step is: \(timerManager.timeChangeMenuStep)")
+        } else {
+            getSeconds()
+        }
+    }
+}
+
+extension TimePickerForm {
+    func closeTimePickerForm() {
+        if timerManager.showTimeChangePicker {
+            timerManager.showTimeChangePicker.toggle()
+        } else {
+            timerManager.showTimePicker = false
+            print("showTimePicker is: \(timerManager.showTimePicker)")
         }
     }
 }

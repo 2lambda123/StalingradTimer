@@ -59,8 +59,9 @@ struct TimerScreen: View {
 //    @State private var showAddingTimeMenu = false
     
     var body: some View {
-        
+        ZStack {
         NavigationView {
+            
         ZStack {
             VStack {
                 //MARK: - "NavigationBar"
@@ -156,13 +157,20 @@ struct TimerScreen: View {
                     Spacer()
                 }
             }
-            if timerManager.showTimeChangePicker {
-                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
-            }
-        } //Main ZStack
+//            if timerManager.showTimeChangePicker {
+//                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
+//                    .edgesIgnoringSafeArea(.all)
+//            }
+        } // ZStack
         .padding()
         .navigationBarHidden(true)
-        }
+        } // NavigationView
+            if timerManager.showTimeChangePicker {
+                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }// main ZStack
+        
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
          // NavigationView
