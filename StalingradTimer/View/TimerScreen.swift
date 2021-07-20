@@ -88,28 +88,43 @@ struct TimerScreen: View {
                                        trainMode: timerManager.getTrainModeName()
                         )
                         .onTapGesture {
+                            
                             if timerManager.trainMode == .work {
                                 showAddingTimeMenu.toggle()
                             }
+                           
+                            
                         }
-                        // уменьшить радиус действия TimerValueText
-                        if showAddingTimeMenu {
+                        if showAddingTimeMenu && timerManager.trainMode == .work {
                             HStack {
-                                Button(action: {}){
+                                Button(action: { timerManager.subtractTime() }){
                                     Image(systemName: "minus")
                                         .font(.largeTitle)
                                         .foregroundColor(.black)
+                                        .frame(width: 40, height: 60)
+//                                        .background(Color.blue)
                                 }
-                                Text("5 сек.")
-                                    .font(.custom("HelveticaNeue", size: 15))
-                                    .padding(.horizontal)
+                                Button(action: {}) {
+                                    Text("5 сек.")
+//                                        .font(.custom("HelveticaNeue", size: 15))
+                                        .font(.custom("HelveticaNeue-Thin", size: 35))
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal)
+                                        .frame(height: 60)
+    //                                    .background(Color.blue)
+                                }
                                 
-                                Button(action: { timerManager.addTime()} ) {
+                                
+                                Button(action: { timerManager.addTime() }) {
                                     Image(systemName: "plus")
                                         .font(.largeTitle)
                                         .foregroundColor(.black)
+                                        .frame(width: 40, height: 60)
+//                                        .background(Color.blue)
                                 }
                             }
+//                            .frame(height: 60)
+//                            .background(Color.blue)
                             .offset(x: 0, y: ((UIScreen.main.bounds.width) / 4))
                         }
                     }
@@ -165,7 +180,7 @@ struct TimerScreen: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer() })
+                    ResetButton(action:  { timerManager.resetTimer(); showAddingTimeMenu = false })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.easeOut(duration: 0.5))

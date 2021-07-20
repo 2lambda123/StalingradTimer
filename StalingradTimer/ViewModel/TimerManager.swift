@@ -14,7 +14,7 @@ class TimerManager: ObservableObject {
     
     var timer: Timer?
     // totalTime = ((prepareTime + workTime + restTime) * rounds) * cycles
-    @Published var usersPrepareTime: Float = 5
+    @Published var usersPrepareTime: Float = 1
     @Published var usersWorkTime: Float = 10
     @Published var usersRestTime: Float = 3
     @Published var usersRounds = 2
@@ -29,7 +29,7 @@ class TimerManager: ObservableObject {
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
     
-    @Published var trainMode: TrainMode = .work
+    @Published var trainMode: TrainMode = .initial
     
     @Published var settingsMode: SettingsMode = .prepare
     
@@ -165,6 +165,13 @@ class TimerManager: ObservableObject {
         if trainMode == .work && currentTime < workTime {
           currentTime += 1
             totalTime += 1
+        }
+    }
+    
+    func subtractTime() {
+        if trainMode == .work && currentTime < workTime {
+          currentTime -= 1
+            totalTime -= 1
         }
     }
     
