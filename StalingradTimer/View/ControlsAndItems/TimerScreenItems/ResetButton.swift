@@ -30,11 +30,9 @@ struct ResetButton: View {
                     .foregroundColor(buttonColor)
                     .padding()
             }
-//            .animation(nil)
             
         }
         .animation(nil)
-//        .opacity(timerManager.trainMode == .initial ? 0.5 : 1)
         .animation(.default)
     }
 }
