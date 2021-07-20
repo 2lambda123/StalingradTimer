@@ -11,7 +11,6 @@
  _________________________________________________________________________
  - Добавить Алерт в ресет баттн
  _________________________________________________________________________
- - доработать страницу Настройки
  {
  -добавить Link с переходом на сайт
  -добавить Link с переходом в инстаграм
@@ -42,10 +41,8 @@
  - Back button в настройках и настрйке таймера
  
  _________________________________________________________________________
- - сделать выбор времени через .sheet
  
  _________________________________________________________________________
- - уменьшить иконки
  */
 
 import SwiftUI
@@ -54,11 +51,12 @@ struct TimerScreen: View {
     
     @EnvironmentObject private var timerManager: TimerManager
     
-
-    
     private let bigLogo = "StalingradLogo"
+    
     @State private var bigLogoAnimate = true
     @State private var totalOpacityAn: Double = 0
+    
+//    @State private var showAddingTimeMenu = false
     
     var body: some View {
         
@@ -83,11 +81,18 @@ struct TimerScreen: View {
                     CircleProgressBar(trimTo: CGFloat(timerManager.circleProgressBarController()))
                     
                     if timerManager.trainMode != .initial {
-                        TimerValueText( timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
-                                        trainMode: timerManager.getTrainModeName()
+                        TimerValueText(timerValue: secondsToMinutesAndSeconds(seconds: timerManager.currentTime),
+                                       trainMode: timerManager.getTrainModeName()
                         )
                         .onTapGesture {
-                            timerManager.addTime()
+                            if timerManager.trainMode == .work {
+                                timerManager.showAddingTimeMenu.toggle()
+                            }
+                            
+                        }
+                        // MARK: - TimeChangerMenu
+                        if timerManager.showAddingTimeMenu && timerManager.trainMode == .work {
+                            TimeChangerMenu()
                         }
                     }
                     // MARK: - Stalingrad Logo
@@ -96,7 +101,7 @@ struct TimerScreen: View {
                         StalingradLogo()
                             .animation(nil)
                             .scaleEffect(bigLogoAnimate ? 1 : 0.8)
-//                            .opacity(bigLogoAnimate ? 1 : 0.8)
+                            //                            .opacity(bigLogoAnimate ? 1 : 0.8)
                             .animation(.easeOut(duration: 0.5), value: bigLogoAnimate)
                             .onAppear() {
                                 withAnimation(.easeOut(duration: 0.5)) {
@@ -142,7 +147,7 @@ struct TimerScreen: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer() })
+                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showAddingTimeMenu = false })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.easeOut(duration: 0.5))
@@ -154,6 +159,8 @@ struct TimerScreen: View {
         .padding()
         .navigationBarHidden(true)
         }
+        .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
+        .onDisappear { UIApplication.shared.isIdleTimerDisabled = false }
          // NavigationView
         
         
@@ -171,118 +178,3 @@ struct TimerScreen_Previews: PreviewProvider {
 
 
 
-
-
-struct StalingradLogo: View {
-    @ObservedObject var timerManager = TimerManager()
-//    @Binding var bigLogoAnimate: Bool
-    
-    var body: some View {
-        Image("StalingradLogo")
-            .resizable()
-            .scaledToFill()
-            .frame(maxWidth:  UIScreen.main.bounds.width - 64, maxHeight: UIScreen.main.bounds.width - 64)
-            .offset(y: 40)
-            .padding()
-    }
-}
-
-struct RoundsTotaltimeCycles: View {
-    @ObservedObject var timerManager: TimerManager
-    var body: some View {
-        VStack {
-            HStack {
-                // Rounds
-                VStack {
-                    // userRounds - ruonds. if == 0 {"1"}
-                    Text("\(timerManager.usersRounds - timerManager.rounds + 1)")
-                        .font(.custom("HelveticaNeue-Thin", size: 38))
-                        //                            .fontWeight(.regular)
-                        +
-                        Text("/\(timerManager.usersRounds)")
-                        .font(.custom("HelveticaNeue-Thin", size: 28))
-                        .fontWeight(.ultraLight)
-                }
-                .frame(maxWidth: .infinity)
-                
-                // Total time
-                VStack {
-                    Text("\(secondsToMinutesAndSeconds(seconds: timerManager.totalTime) )")
-                        .font(.custom("HelveticaNeue-Thin", size: 38))
-                        .minimumScaleFactor(0.5)
-                        .scaledToFit()
-//                        .animation(.none)
-                        
-                    
-                }
-                .frame(maxWidth: .infinity)
-                
-                // Cycles
-                VStack {
-                    Text(timerManager.usersCycles == 1 ? "" : "\(timerManager.usersCycles - timerManager.cycles + 1)")
-                        .font(.custom("HelveticaNeue-Thin", size: 38))
-                        //                            .fontWeight(.regular)
-                        +
-                        Text(timerManager.usersCycles == 1 ? "" : "/\(timerManager.usersCycles)")
-                        
-                        .font(.custom("HelveticaNeue-Thin", size: 28))
-                        .fontWeight(.ultraLight)
-                }
-                .frame(maxWidth: .infinity)
-            }
-
-            
-            .foregroundColor(.black)
-//            .background(Color.white)
-            
-            HStack {
-                Text("РАУНДЫ")
-                    .font(.custom("HelveticaNeue-Thin", size: 16))
-                    .italic()
-                    .fontWeight(.ultraLight)
-                    .frame(maxWidth: .infinity)
-                Text("ОСТАЛОСЬ")
-                    .italic()
-                    .font(.custom("HelveticaNeue-Thin", size: 16))
-                    .fontWeight(.ultraLight)
-                    .frame(maxWidth: .infinity)
-                Text(timerManager.usersCycles == 1 ? "" : "ЦИКЛЫ")
-                    .italic()
-                    .font(.custom("HelveticaNeue-Thin", size: 16))
-                    .fontWeight(.ultraLight)
-                    .frame(maxWidth: .infinity)
-            }
-        }
-//                    .opacity(timerManager.trainMode != .initial ? 1 : 0)
-//                    .animation(.easeIn(duration: 0.5))
-        .transition(.scale)
-    }
-}
-
-struct SettingsButton: View {
-    @ObservedObject var timerManager: TimerManager
-    var body: some View {
-        NavigationLink(destination: SettingsScreen()) {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 35, weight: .light))
-                    .foregroundColor(.black)
-                    .animation(nil)
-                    .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                    .animation(.easeOut(duration: 0.5))
-        }
-    }
-}
-
-struct TimerSettingsButton: View {
-    @ObservedObject var timerManager: TimerManager
-    var body: some View {
-        NavigationLink(destination: TimerSettingsScreen()) {
-            Image(systemName: "stopwatch")
-                .font(.system(size: 35, weight: .light))
-                .foregroundColor(.black)
-                .animation(nil)
-                .opacity(timerManager.trainMode != .initial ? 0.5 : 1)
-                .animation(.default)
-        }
-    }
-}
