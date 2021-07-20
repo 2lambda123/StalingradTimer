@@ -86,14 +86,15 @@ struct TimerScreen: View {
                         )
                         .onTapGesture {
                             if timerManager.trainMode == .work {
-                                timerManager.showAddingTimeMenu.toggle()
+                                timerManager.showTimeChangerMenu.toggle()
                             }
                             
                         }
                         // MARK: - TimeChangerMenu
-                        if timerManager.showAddingTimeMenu && timerManager.trainMode == .work {
+                        if timerManager.showTimeChangerMenu && timerManager.trainMode == .work {
                             TimeChangerMenu()
                         }
+                       
                     }
                     // MARK: - Stalingrad Logo
                     
@@ -147,13 +148,16 @@ struct TimerScreen: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showAddingTimeMenu = false })
+                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showTimeChangerMenu = false })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.easeOut(duration: 0.5))
 //                        .animation(.easeInOut(duration: 0))
                     Spacer()
                 }
+            }
+            if timerManager.showTimeChangePicker {
+                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
             }
         } //Main ZStack
         .padding()

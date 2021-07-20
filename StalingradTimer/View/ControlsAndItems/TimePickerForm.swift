@@ -77,7 +77,7 @@ struct TimePickerForm: View {
                 Divider()
                 // minets
                 HStack(spacing: 2) {
-                    
+                    if !timerManager.showTimeChangerMenu {
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
                             Text(index > 9 ? "\(self.minutesArray[index])" : "0" + "\(self.minutesArray[index])")
@@ -95,6 +95,7 @@ struct TimePickerForm: View {
                     .clipped()
                     
                     Text(":")
+                    }
                    // seconds
                     Picker(selection: $secondSelection, label: Text("")) {
                         ForEach(0 ..< secondsArray.count) { index in
@@ -115,7 +116,15 @@ struct TimePickerForm: View {
                 }
                 
                 Divider()
-                Button(action: { getSeconds();   timerManager.showTimePicker = false ; print("\(timerManager.settingsMode) time is: \(seconds) sec") }) {
+                Button(action: {
+                        if timerManager.showTimeChangerMenu {
+                            timerManager.timeChangeMenuStep = Float(secondSelection)
+                            timerManager.showTimeChangePicker = false
+                            print("step is: \(timerManager.timeChangeMenuStep)")
+                        } else {
+                            getSeconds();   timerManager.showTimePicker = false ; print("\(timerManager.settingsMode) time is: \(seconds) sec") 
+                        }
+                       }) {
                     Text("OK")
                         .italic()
 //                        .fontWeight(.bold)

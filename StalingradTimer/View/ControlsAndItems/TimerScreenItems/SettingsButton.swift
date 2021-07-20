@@ -12,7 +12,7 @@ struct SettingsButton: View {
     @ObservedObject var timerManager = TimerManager()
     
     var body: some View {
-        Button(action: { timerManager.showSettingsScreen.toggle() }) {
+        Button(action: { timerManager.showTimeChangePicker.toggle() }) {
             Image(systemName: "gearshape")
                 .font(.system(size: 35, weight: .light))
                 .foregroundColor(.black)
