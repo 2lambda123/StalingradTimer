@@ -189,6 +189,14 @@ class TimerManager: ObservableObject {
             }
         }
     }
+    //MARK: - resetCurrentTime
+    func resetCurrentTime() {
+        if trainMode == .work {
+            totalTime += (workTime - currentTime)
+            currentTime = workTime
+            print("test totalTime is: \(totalTime)")
+        }
+    }
     
     func circleProgressBarController() -> Float {
         var progressValue: Float = 0
