@@ -33,6 +33,7 @@ struct FormRawSettingsView: View {
             Image(systemName: "chevron.right")
                 .foregroundColor(.secondary)
         }
+        
     }
 }
 

@@ -81,20 +81,27 @@ struct SettingsScreen: View {
 //                    }
                     Section(header: Text("")) {
                         FormRawSettingsView(icon: "stopwatch.fill", firstText: "Таймер", iconBG: Color.red)
+//                            .listRowInsets(.init())
+//                            .listRowBackground(Color.blue)
+//                            .padding(.horizontal)
                     }
+                    
                     Section(header: Text("")) {
                         FormRawSettingsView(icon: "crown.fill", firstText: "Клуб Сталинград", iconBG: Color.red)
                         FormRawSettingsView(icon: "link.circle.fill", firstText: "Контакты", iconBG: Color.blue)
                         FormRawSettingsView(icon: "arrowshape.turn.up.forward.fill", firstText: "Поделиться", iconBG: Color.blue)
                     }
+                    
                     Section(header: Text("")) {
                         FormRawSettingsView(icon: "info.circle.fill", firstText: "О приложении", iconBG: Color.black)
                     }
 //                    .textCase(nil)
                     
                 } // Form
+                
                 .padding(.top, -10)
 //
+                
             // MARK: - Footer
             Text("Copyright © All rights reserved.")
                 .multilineTextAlignment(.center)

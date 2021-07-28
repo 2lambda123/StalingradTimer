@@ -174,7 +174,8 @@ extension TimePickerForm {
     timerManager.showTimePicker = false
     print("\(timerManager.settingsMode) time is: \(seconds) sec")
     }
-    
+}
+extension TimePickerForm {
     private func getTimeFromPicker() {
         if timerManager.showTimeChangerMenu {
             timerManager.timeChangeMenuStep = Float(secondSelection)
