@@ -14,6 +14,7 @@
 		042530BC25FAB59F0061C318 /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042530BB25FAB59E0061C318 /* TimerScreen.swift */; };
 		042AAE782667C283009718C6 /* ValuePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AAE772667C283009718C6 /* ValuePickerForm.swift */; };
 		0459F2B1269F7394000CBF91 /* FormRawSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459F2B0269F7394000CBF91 /* FormRawSettingsView.swift */; };
+		0473885E26B26A0A0064A31E /* FastTrainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473885D26B26A090064A31E /* FastTrainScreen.swift */; };
 		0484D9752630A3A800879D2C /* TimerSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */; };
 		0490AF14263B3CCF004ED3A4 /* TimePickerForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */; };
 		0490AF18263B44BE004ED3A4 /* TestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490AF17263B44BE004ED3A4 /* TestPicker.swift */; };
@@ -44,6 +45,7 @@
 		042530BB25FAB59E0061C318 /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
 		042AAE772667C283009718C6 /* ValuePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerForm.swift; sourceTree = "<group>"; };
 		0459F2B0269F7394000CBF91 /* FormRawSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRawSettingsView.swift; sourceTree = "<group>"; };
+		0473885D26B26A090064A31E /* FastTrainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTrainScreen.swift; sourceTree = "<group>"; };
 		0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsScreen.swift; sourceTree = "<group>"; };
 		0490AF13263B3CCF004ED3A4 /* TimePickerForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerForm.swift; sourceTree = "<group>"; };
 		0490AF17263B44BE004ED3A4 /* TestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPicker.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				042530BB25FAB59E0061C318 /* TimerScreen.swift */,
 				04ADFAF9262F6B1D00BF29D1 /* SettingsScreen.swift */,
 				0484D9742630A3A800879D2C /* TimerSettingsScreen.swift */,
+				0473885D26B26A090064A31E /* FastTrainScreen.swift */,
 				04A9EEC525FCEBB200254588 /* ControlsAndItems */,
 				04A9EEC425FCEB9B00254588 /* Modifiers */,
 			);
@@ -277,6 +280,7 @@
 				0425308E25FAB48C0061C318 /* StalingradTimerApp.swift in Sources */,
 				049A846D2651AFF10014098D /* SettingsMode.swift in Sources */,
 				04A9EEC025FCEB6F00254588 /* Helper.swift in Sources */,
+				0473885E26B26A0A0064A31E /* FastTrainScreen.swift in Sources */,
 				0459F2B1269F7394000CBF91 /* FormRawSettingsView.swift in Sources */,
 				04A9EEC725FCEBD400254588 /* ShadowForViews.swift in Sources */,
 				042AAE782667C283009718C6 /* ValuePickerForm.swift in Sources */,
