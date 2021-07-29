@@ -22,7 +22,7 @@ class TimerManager: ObservableObject {
     @Published var usersCyclesRest: Float = 20
     
     @Published var showTimePicker = false
-    @Published var showValuePicker = false
+//    @Published var showValuePicker = false
     
     @Published var showSettingsScreen = false
     
