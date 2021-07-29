@@ -21,7 +21,7 @@ struct SettingsButton: View {
                 .animation(.easeOut(duration: 0.5))
         }
         .sheet(isPresented: $timerManager.showSettingsScreen) {
-            SettingsScreen()
+            SettingsView()
         }
     }
 }

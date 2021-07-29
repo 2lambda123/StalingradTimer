@@ -14,7 +14,7 @@ struct StalingradTimerApp: App {
         
         WindowGroup {
 //            NavigationView{
-                TimerScreen()
+                TimerView()
                     .environmentObject(TimerManager())
                     
 //                    .navigationBarHidden(true)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimerSettingsScreen: View {
+struct TimerSettingsView: View {
     
     @Environment(\.presentationMode) var timerSettingsPresentation
         
@@ -167,7 +167,7 @@ struct TimerSettingsScreen: View {
 struct TimerSettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TimerSettingsScreen()
+            TimerSettingsView()
                 .environmentObject(TimerManager())
         }
         
