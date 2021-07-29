@@ -60,9 +60,9 @@ struct TimePickerForm: View {
                     .font(.custom("HelveticaNeue", fixedSize: 20))
                 
                 Divider()
-                // minets
+                // MARK: - Minutes
                 HStack(spacing: 2) {
-                    if !timerManager.showTimeChangerMenu {
+                    if !timerManager.showTimeChangerMenu  && timerManager.settingsMode != .rounds && timerManager.settingsMode != .cycles  {
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
                             Text(index > 9 ? "\(self.minutesArray[index])" : "0" + "\(self.minutesArray[index])")
@@ -81,7 +81,7 @@ struct TimePickerForm: View {
                     
                     Text(":")
                     }
-                   // seconds
+                   // MARK: - Seconds
                     Picker(selection: $secondSelection, label: Text("")) {
                         ForEach(0 ..< secondsArray.count) { index in
                             //                                Text("\(self.secondsArray[index])")
@@ -101,6 +101,7 @@ struct TimePickerForm: View {
                 }
                 
                 Divider()
+                    // MARK: - OK button
                 Button(action: {getTimeFromPicker()}) {
                     Text("OK")
                         .italic()
@@ -124,10 +125,8 @@ struct TimePickerForm: View {
             CancelButton(action: { closeTimePickerForm() })
                 .offset(x: 100, y: -120)
                 .offset(y: -44)
-            
         } // Zstack
     }
-    
 }
 
 struct TimePickerForm_Previews: PreviewProvider {
@@ -136,8 +135,6 @@ struct TimePickerForm_Previews: PreviewProvider {
             TimePickerForm(seconds: 1, minuteSelection: 5, secondSelection: 10, timePickerText: "Подготовка")
                 .environmentObject(TimerManager())
         } .navigationBarTitleDisplayMode(.inline)
-        
-        
     }
 }
 
@@ -151,8 +148,6 @@ struct CancelButton: View {
                 .mask(Circle())
                 .foregroundColor(.red)
                 .frame(width: 35, height: 35)
-                
-            
         }
     }
 }
@@ -173,7 +168,7 @@ extension TimePickerForm {
         }
     timerManager.showTimePicker = false
     print("\(timerManager.settingsMode) time is: \(seconds) sec")
-    }
+   }
 }
 extension TimePickerForm {
     private func getTimeFromPicker() {
@@ -181,9 +176,14 @@ extension TimePickerForm {
             timerManager.timeChangeMenuStep = Float(secondSelection)
             timerManager.showTimeChangePicker = false
             print("step is: \(timerManager.timeChangeMenuStep)")
+        } else if timerManager.settingsMode == .rounds {
+            timerManager.usersRounds = secondSelection
+        } else if timerManager.settingsMode == .cycles {
+            timerManager.usersCycles = secondSelection
         } else {
             getSeconds()
         }
+        timerManager.showTimePicker = false
     }
 }
 

@@ -85,7 +85,7 @@ struct TimerSettingsScreen: View {
                         
                         Spacer()
                         
-                        Button(action: {  timerManager.showValuePicker = true ; timerManager.settingsMode = .rounds }) {
+                        Button(action: {  timerManager.showTimePicker = true ; timerManager.settingsMode = .rounds }) {
                             Text("\(timerManager.usersRounds)")
                                 .foregroundColor(.black)
                                 .padding(5)
@@ -101,7 +101,7 @@ struct TimerSettingsScreen: View {
                             
                         Spacer()
                         
-                        Button(action: { timerManager.showValuePicker = true ; timerManager.settingsMode = .cycles }) {
+                        Button(action: { timerManager.showTimePicker = true ; timerManager.settingsMode = .cycles }) {
                             Text("\(timerManager.usersCycles)")
                                 .foregroundColor(.black)
                                 .padding(5)
@@ -136,12 +136,12 @@ struct TimerSettingsScreen: View {
                 TimePickerForm(seconds: timerManager.usersRestTime, minuteSelection: (Int(timerManager.usersRestTime) % 3600) / 60 , secondSelection: (Int(timerManager.usersRestTime) % 3600) % 60, timePickerText: "Отдых" )
             }
             
-            if timerManager.showValuePicker && timerManager.settingsMode == .rounds {
-                ValuePickerForm(valuePickerText: "Раунды", valuePickerValue: timerManager.usersRounds)
+            if timerManager.showTimePicker && timerManager.settingsMode == .rounds {
+                TimePickerForm(seconds: Float(timerManager.usersRounds), minuteSelection: 0, secondSelection: (Int(timerManager.usersRounds) % 3600) % 60, timePickerText: "Раунды")
             }
             
-            if timerManager.showValuePicker && timerManager.settingsMode == .cycles {
-                ValuePickerForm(valuePickerText: "Циклы", valuePickerValue: timerManager.usersCycles)
+            if timerManager.showTimePicker && timerManager.settingsMode == .cycles {
+                TimePickerForm(seconds: Float(timerManager.usersCycles), minuteSelection: 0, secondSelection: (Int(timerManager.usersCycles) % 3600) % 60, timePickerText: "Циклы")
             }
             
             if timerManager.showTimePicker && timerManager.settingsMode == .cycleRest {
@@ -151,7 +151,7 @@ struct TimerSettingsScreen: View {
         .navigationBarTitle(Text("Настройка таймера"), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: { timerSettingsPresentation.wrappedValue.dismiss() }) {
-            if timerManager.showTimePicker || timerManager.showValuePicker == false {
+            if timerManager.showTimePicker == false {
                 HStack {
                     Image(systemName: "chevron.left")
                         .font(.title3)
