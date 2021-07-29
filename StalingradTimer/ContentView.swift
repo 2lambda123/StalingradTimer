@@ -20,7 +20,7 @@ struct ContentView: View {
             
             TabView(selection: $selected) {
                 
-                TimerScreen()
+                TimerView()
                     .tabItem {
                         Image(systemName: (selected == 0 ? "stopwatch.fill" : "stopwatch"))
                         Text("Таймер")

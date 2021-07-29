@@ -47,7 +47,7 @@
 
 import SwiftUI
 
-struct TimerScreen: View {
+struct TimerView: View {
     
     @EnvironmentObject private var timerManager: TimerManager
     
@@ -181,7 +181,7 @@ struct TimerScreen: View {
 }
 struct TimerScreen_Previews: PreviewProvider {
     static var previews: some View {
-            TimerScreen()
+            TimerView()
                 .environmentObject(TimerManager())
     }
 }
