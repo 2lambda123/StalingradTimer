@@ -12,7 +12,7 @@ struct TimerSettingsButton: View {
     @ObservedObject var timerManager = TimerManager()
     
     var body: some View {
-        NavigationLink(destination: TimerSettingsView()) {
+        NavigationLink(destination: FastTrainView()) {
             Image(systemName: "stopwatch")
                 .font(.system(size: 35, weight: .light))
                 .foregroundColor(.black)

@@ -87,13 +87,13 @@ struct TimerView: View {
                         )
                         .onTapGesture {
                             if timerManager.trainMode == .work {
-                                timerManager.showTimeChangerMenu.toggle()
+                                timerManager.showTimeController.toggle()
                             }
                             
                         }
-                        // MARK: - TimeChangerMenu
-                        if timerManager.showTimeChangerMenu && timerManager.trainMode == .work {
-                            TimeChangerMenu()
+                        // MARK: - TimeController
+                        if timerManager.showTimeController && timerManager.trainMode == .work {
+                            TimeController()
                         }
                        
                     }
@@ -149,7 +149,7 @@ struct TimerView: View {
             VStack {
                 Spacer()
                 HStack {
-                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showTimeChangerMenu = false })
+                    ResetButton(action:  { timerManager.resetTimer(); timerManager.showTimeController = false })
                         .disabled(timerManager.trainMode == .initial)
                         .opacity(timerManager.trainMode == .initial ? 0.3 : 1)
                         .animation(.easeOut(duration: 0.5))
@@ -165,8 +165,8 @@ struct TimerView: View {
         .padding()
         .navigationBarHidden(true)
         } // NavigationView
-            if timerManager.showTimeChangePicker {
-                TimePickerForm(seconds: Float(timerManager.timeChangeMenuStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeChangeMenuStep) % 3600) % 60, timePickerText: "Выберите шаг")
+            if timerManager.showTimeControllerPicker {
+                TimePickerForm(seconds: Float(timerManager.timeControllerStep), minuteSelection: 0, secondSelection: (Int(timerManager.timeControllerStep) % 3600) % 60, timePickerText: "Выберите шаг")
                     .edgesIgnoringSafeArea(.all)
             }
         }// main ZStack

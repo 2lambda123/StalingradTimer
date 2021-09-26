@@ -46,7 +46,7 @@ struct SettingsView: View {
 //            .background(Color("menuBG"))
             .background(Color.white)
             
-                Form {
+            Form {
                     //MARK: - Section 1
                     Section(header: Text("")){
                         HStack {

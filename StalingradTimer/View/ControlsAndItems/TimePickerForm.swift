@@ -20,8 +20,10 @@ struct TimePickerForm: View {
     
     @State var seconds: Float
     
+    
     var minutesArray = [Int](0...59)
     var secondsArray = [Int](0...59)
+    var stepsArray = [Int](1...60)
     
     let hoursInDay = 24
     let secondsInMinute = 60
@@ -62,7 +64,7 @@ struct TimePickerForm: View {
                 Divider()
                 // MARK: - Minutes
                 HStack(spacing: 2) {
-                    if !timerManager.showTimeChangerMenu  && timerManager.settingsMode != .rounds && timerManager.settingsMode != .cycles  {
+                    if !timerManager.showTimeController  && timerManager.settingsMode != .rounds && timerManager.settingsMode != .cycles  {
                     Picker(selection: self.$minuteSelection, label: Text("")) {
                         ForEach(0 ..< self.minutesArray.count) { index in
                             Text(index > 9 ? "\(self.minutesArray[index])" : "0" + "\(self.minutesArray[index])")
@@ -80,25 +82,46 @@ struct TimePickerForm: View {
                     .clipped()
                     
                     Text(":")
-                    }
-                   // MARK: - Seconds
-                    Picker(selection: $secondSelection, label: Text("")) {
-                        ForEach(0 ..< secondsArray.count) { index in
-                            //                                Text("\(self.secondsArray[index])")
-                            Text(index > 9 ? "\(self.secondsArray[index])" : "0" + "\(self.secondsArray[index])")
-//                                .fontWeight(.light)
-                                .foregroundColor(.black)
-                                .font(.custom("HelveticaNeue", fixedSize: 30))
-                                .tag(index)
+                        // MARK: - Seconds
+                        Picker(selection: $secondSelection, label: Text("")) {
+                            ForEach(0 ..< secondsArray.count) { index in
+                                //                                Text("\(self.secondsArray[index])")
+                                Text(index > 9 ? "\(self.secondsArray[index])" : "0" + "\(self.secondsArray[index])")
+                                    //                                .fontWeight(.light)
+                                    .foregroundColor(.black)
+                                    .font(.custom("HelveticaNeue", fixedSize: 30))
+                                    .tag(index)
+                            }
                         }
-                    }
-                    .labelsHidden()
-                    .onChange(of: secondSelection) { newValue in
-                        seconds = Float(totalInSeconds)
-                    }
-                    .frame(width: 80, height: 110)
-                    .clipped()
+                        .labelsHidden()
+                        .onChange(of: secondSelection) { newValue in
+                            seconds = Float(totalInSeconds)
+                        }
+                        .frame(width: 80, height: 110)
+                        .clipped()
+                   
+                    } else {
+                        Picker(selection: $secondSelection, label: Text("")) {
+                            ForEach(0 ..< 59) { index in
+//                                Text(index > 9 ? "\(self.secondsArray[index] )" : "0" + "\(self.secondsArray[index]  )")
+                                Text(index > 9 ? "\(self.stepsArray.map{$0 - 1}.filter{return $0 != 0}[index] )" : "0" + "\(self.stepsArray.map{$0 - 1}.filter{return $0 != 0}[index]  )")
+//                                    .filter{return $0 != 0} - фильтр убирает 0, го все смещается на 1
+//                                Text(getIndex(index: index))
+                                    .foregroundColor(.black)
+                                    .font(.custom("HelveticaNeue", fixedSize: 30))
+                                    .tag(index)
+                            }
+                        }
+                        .labelsHidden()
+//                        .onChange(of: secondSelection) { newValue in
+//                            seconds = Float(totalInSeconds)
+//                        }
+                        .frame(width: 80, height: 110)
+                        .clipped()
                 }
+                    }
+                    
+                   
                 
                 Divider()
                     // MARK: - OK button
@@ -113,6 +136,9 @@ struct TimePickerForm: View {
                 }
                 .offset(x: 0, y: 5)
                 .disabled(secondSelection + minuteSelection == 0 && timerManager.settingsMode == .work)
+                .disabled(secondSelection == 0 && timerManager.settingsMode == .rounds)
+                .disabled(secondSelection == 0 && timerManager.settingsMode == .cycles)
+                .disabled(secondSelection == 0 && timerManager.showTimeControllerPicker)
                 
                 
             }// Vstack
@@ -172,14 +198,19 @@ extension TimePickerForm {
 }
 extension TimePickerForm {
     private func getTimeFromPicker() {
-        if timerManager.showTimeChangerMenu {
-            timerManager.timeChangeMenuStep = Float(secondSelection)
-            timerManager.showTimeChangePicker = false
-            print("step is: \(timerManager.timeChangeMenuStep)")
+        
+        if timerManager.showTimeController {
+            timerManager.timeControllerStep = Float(secondSelection)
+            timerManager.showTimeControllerPicker = false
+            print("step is: \(timerManager.timeControllerStep)")
+        
         } else if timerManager.settingsMode == .rounds {
             timerManager.usersRounds = secondSelection
-        } else if timerManager.settingsMode == .cycles {
+            print("\(timerManager.usersRounds) rounds")
+        
+        } else if timerManager.settingsMode == .cycles  {
             timerManager.usersCycles = secondSelection
+            print("\(timerManager.usersCycles) cycles")
         } else {
             getSeconds()
         }
@@ -189,11 +220,24 @@ extension TimePickerForm {
 
 extension TimePickerForm {
     func closeTimePickerForm() {
-        if timerManager.showTimeChangePicker {
-            timerManager.showTimeChangePicker.toggle()
+        if timerManager.showTimeControllerPicker {
+            timerManager.showTimeControllerPicker.toggle()
         } else {
             timerManager.showTimePicker = false
             print("showTimePicker is: \(timerManager.showTimePicker)")
         }
     }
 }
+
+
+//extension TimePickerForm {
+//    func getIndex(index:  Int) -> String {
+//        var index = index
+//        if index == 0 {
+//           index = 1
+//        }
+//        return index > 9 ? "\(self.secondsArray[index] )" : "0" + "\(self.secondsArray[index] )"
+//    }
+//
+//
+//}

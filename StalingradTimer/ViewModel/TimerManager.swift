@@ -26,9 +26,9 @@ class TimerManager: ObservableObject {
     
     @Published var showSettingsScreen = false
     
-    @Published var showTimeChangerMenu = false
-    @Published var showTimeChangePicker = false
-    @Published var timeChangeMenuStep: Float = 1
+    @Published var showTimeController = false
+    @Published var showTimeControllerPicker = false
+    @Published var timeControllerStep: Float = 1
     
     @Published var currentTime: Float = 0 // seconds
     @Published var totalTime: Float = 0
@@ -156,6 +156,7 @@ class TimerManager: ObservableObject {
         print(#function)
         
         trainMode = .initial
+        showTimeController = false
         currentTime = 0
         
         timer?.invalidate()
@@ -167,12 +168,12 @@ class TimerManager: ObservableObject {
   //MARK: - addTime
     func addTime() {
         if trainMode == .work && currentTime < workTime {
-            if timeChangeMenuStep + currentTime > workTime {
+            if timeControllerStep + currentTime > workTime {
                 totalTime += (workTime - currentTime)
                 currentTime = workTime
             } else {
-                currentTime += timeChangeMenuStep
-                totalTime += timeChangeMenuStep
+                currentTime += timeControllerStep
+                totalTime += timeControllerStep
                 
             }
         }
@@ -180,12 +181,12 @@ class TimerManager: ObservableObject {
     //MARK: - subtractTime
     func subtractTime() {
         if trainMode == .work && currentTime <= workTime && currentTime > 0 {
-            if currentTime - timeChangeMenuStep < 0 {
+            if currentTime - timeControllerStep < 0 {
                 totalTime -= currentTime
                 currentTime = 0
             } else {
-          currentTime -= timeChangeMenuStep
-            totalTime -= timeChangeMenuStep
+          currentTime -= timeControllerStep
+            totalTime -= timeControllerStep
             }
         }
     }
@@ -197,6 +198,7 @@ class TimerManager: ObservableObject {
             print("test totalTime is: \(totalTime)")
         }
     }
+
     
     func circleProgressBarController() -> Float {
         var progressValue: Float = 0
@@ -261,6 +263,8 @@ class TimerManager: ObservableObject {
             // добавить отдых между циклами
         }
     }
+    
+    
 }
 
 
